@@ -1,0 +1,34 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 1}
+\date{Ausgabe: Di, 2.4.2019, Besprechung: Fr, 5.4.2019}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Rundungsfehler]
+  Berechnen Sie die folgenden Ausdrücke direkt nach Formel numerisch.
+  Suchen Sie dann nach einem numerischen Rechenweg, der die Auslöschung
+  vermeidet.
+  \begin{enumerate}[(i)]
+  \item $\frac{1}{\sqrt{x}} - \frac{1}{\sqrt{x + 1}}$, für $x ≫ 1$,
+  \item $\frac{1 - \cos x}{\sin x}$, für $|x| ≪ 1 $,
+  \item $\log (a + x) - \log x$, für $x ≫ a$.
+  \end{enumerate}
+  Vergleichen Sie die relativen Fehler.
+\end{question}
+
+\begin{question}[subtitle=Benfordsches Gesetz]
+  Die Benford-Verteilung ist definiert als
+  \begin{equation}
+    \label{eq:benford}
+    p_{fZ}(d) = \ln \left( \frac{d + 1}{d}\right) \frac{1}{\ln b}.
+  \end{equation}
+  Die Verteilung gibt die Wahrscheinlichkeit an, dass die Ziffer $d$ als führende Ziffer in einem Benford-verteiltem Datensatz auftritt.
+  Typische Bendorf-verteilte Datensätze sind Bevölkerungszahlen, Anzahl von Wahlstimmen und Steuerauskünfte.
+
+  Finden Sie dazu zunächst einen Zufallszahlengenerator, der zufällige gleichverteilte Zahlen im Intervall $(0, 1)$ erzeugt.
+  Multiplizieren Sie dann z.B.\ \num{1000} dieser Zufallszahlen, $\prod_{i = 1}^{1000} xᵢ$.
+  Erstellen Sie ein Histogramm der führenden Ziffer der Mantisse für 1000 auf diese Art generierte $r$ und
+  vergleichen Sie mit der Benfordschen Verteilung.
+\end{question}
+\end{document}
