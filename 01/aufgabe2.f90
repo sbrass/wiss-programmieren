@@ -5,9 +5,6 @@ program main
 
   real(8) :: r, prod
 
-  ! character(15) :: str
-  ! character(1) :: digit
-
   call random_seed(size = n)
   allocate(seed(n))
   seed = 12345

@@ -1,34 +1,37 @@
 \input{header.tex}
 \NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 1}
-\date{Ausgabe: Di, 2.4.2019, Besprechung: Fr, 5.4.2019}
+\date{Ausgabe: Di, 9.4.2019, Besprechung: Fr, 12.4.2019}
 \begin{document}
 
 \maketitle
 
 \begin{question}[subtitle=Rundungsfehler]
-  Berechnen Sie die folgenden Ausdrücke direkt nach Formel numerisch.
-  Suchen Sie dann nach einem numerischen Rechenweg, der die Auslöschung
-  vermeidet.
+  Berechnen Sie die folgenden Ausdrücke numerisch direkt nach Formel.
+  Suchen Sie dann nach einem numerischen Rechenweg, der Auslöschung vermeidet.
   \begin{enumerate}[(i)]
   \item $\frac{1}{\sqrt{x}} - \frac{1}{\sqrt{x + 1}}$, für $x ≫ 1$,
   \item $\frac{1 - \cos x}{\sin x}$, für $|x| ≪ 1 $,
   \item $\log (a + x) - \log x$, für $x ≫ a$.
   \end{enumerate}
-  Vergleichen Sie die relativen Fehler.
+  Vergleichen Sie die relativen Fehler zwischen dem direkten und verbessertem Ansatz.
 \end{question}
 
 \begin{question}[subtitle=Benfordsches Gesetz]
   Die Benford-Verteilung ist definiert als
   \begin{equation}
     \label{eq:benford}
-    p_{fZ}(d) = \ln \left( \frac{d + 1}{d}\right) \frac{1}{\ln b}.
+    p_{\symup{fZ}}(d) = \ln \left( \frac{d + 1}{d}\right) \frac{1}{\ln b},
   \end{equation}
-  Die Verteilung gibt die Wahrscheinlichkeit an, dass die Ziffer $d$ als führende Ziffer in einem Benford-verteiltem Datensatz auftritt.
+  Die Verteilung gibt die Wahrscheinlichkeit an, dass die Ziffer $d$ als führende Ziffer in der Darstellung $b$ in einem Benford-verteiltem Datensatz auftritt.
   Typische Bendorf-verteilte Datensätze sind Bevölkerungszahlen, Anzahl von Wahlstimmen und Steuerauskünfte.
 
   Finden Sie dazu zunächst einen Zufallszahlengenerator, der zufällige gleichverteilte Zahlen im Intervall $(0, 1)$ erzeugt.
-  Multiplizieren Sie dann z.B.\ \num{1000} dieser Zufallszahlen, $\prod_{i = 1}^{1000} xᵢ$.
-  Erstellen Sie ein Histogramm der führenden Ziffer der Mantisse für 1000 auf diese Art generierte $r$ und
-  vergleichen Sie mit der Benfordschen Verteilung.
+  Multiplizieren Sie dann z.\,B.\ \num{100} dieser Zufallszahlen, $r = \prod_{i = 1}^{100} xᵢ$.
+  Erstellen Sie ein Histogramm der führenden Ziffer der Mantisse für \num{1000} auf diese Art generierten Zahlen $r$ und vergleichen Sie diese mit der Benfordschen Verteilung.\\[1.5em]
+
+  \textit{Hinweis:} Um die Aufgabe zu lösen, benötigen Sie einen Zufallszahlengenerator.
+  Im folgenden Quellcode ist das Aufsetzen des Zufallsgenerators aus dem Fortran-Standard skizziert.
+  Verwenden Sie dieses Beispiel und erweitern Sie es für die Lösung der Aufgabe.
+  \inputminted{fortran}{../src/aufgabe02.f90}
 \end{question}
 \end{document}
