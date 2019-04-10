@@ -12,7 +12,7 @@ contains
     integer, intent(in) :: a
     integer, intent(in) :: c
     integer, intent(in) :: m
-    r = mod (a * state + c, m)
+    r = modulo (a * state + c, m)
   end function lcg
 
   real function lcg01 (state, a, c, m) result (r)
