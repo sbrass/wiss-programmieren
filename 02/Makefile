@@ -1,10 +1,10 @@
 FC=gfortran
 FCFLAGS=-O2 -Wall -Werror -pedantic -std=f2008ts
 
-aufgabe3: aufgabe3.o rng.o
+aufgabe3: rng.o aufgabe3.o
 	$(FC) $(FCFLAGS) -o $@ $^
 
-aufgabe4: aufgabe4.o rng.o
+aufgabe4: rng.o aufgabe4.o
 	$(FC) $(FCFLAGS) -o $@ $^
 
 rng.o: rng.f90
@@ -18,5 +18,6 @@ aufgabe4.o: aufgabe4.f90
 
 .PHONY: clean
 clean:
-	rm -f *.o
+	rm -f *.o *.mod *.dat
 	rm -f aufgabe3
+	rm -f aufgabe4

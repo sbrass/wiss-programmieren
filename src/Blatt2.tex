@@ -1,0 +1,62 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 2}
+\date{Ausgabe: Di, 16.04.2019, Besprechung: Fr, 26.04.2019}
+\setcounter{question}{3}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Linear kongruente Generatoren]
+  Generieren Sie Pseudo-Zufallszahlen, indem Sie einen linear kongruenten Generator (LCG),
+  \begin{equation}
+    \label{eq:1}
+    r_{n + 1} = \left( a r_n + c \right) \mod m,
+  \end{equation}
+  selbst implementieren.
+
+  \begin{enumerate}[(i)]
+  \item Schreiben Sie ein Programm, um die ersten $N$ Glieder ($N < m$) der Integer-Folge $r_n$ abhängig von den vier Parametern $r₀$ (Seed), $a$ (Faktor), $c$ (Inkrement) und $m$ (Modul) zu generieren.
+    Teilen Sie durch $m$, um einen \textit{floating point} Generator für Zufallszahlen in $[0, 1)$ zu erhalten.
+  \item Untersuchen Sie für die vier Parametersätze:
+    \begin{enumerate}[(a)]
+    \item\label{item:1} $r_0 = 1234, a = 20, c = 120, m = 6075$,
+    \item\label{item:2} $r_0 = 1234, a = 137, c = 187, m 256$,
+    \item\label{item:3} $r_0 = 123456789, a = 65539, c = 0, m = 2^{31} = 2147483648$ (\textsc{Randu} Generator von IBM),
+    \item\label{item:4} $r_0 = 1234, a = 7^5 = 16807, c = 0, m = 2^{31} - 1$ (\texttt{ran1()} aus Num.\ Rec.\ 2 Ausgabe),
+    \end{enumerate}
+    ihren \textit{floating point} Generator zuerst auf Gleichverteilung, indem Sie für $N = 10^4$ Werte ein Histogramm erstellen, wobei Sie das Intervall $[0, 1)$ in \num{10} Bins der Länge \num{0.1} aufteilen.
+  \item Testen Sie die vier \textit{floating point} Generatoren~(a)-(d) auf Korrelationen, indem Sie jeweils $\sfrac{N}{2}$-Paare $(r_n, r_{n - 1})$ aus aufeinanderfolgenden Punkten in einem zweidimensionalen Quadrat $[0, 1]²$ auftragen.
+    Benutzen Sie bis zu $N = 10^5$ Werte (beachten Sie aber, dass nur $N < m$ Sinn macht).
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=\textsc{Xorshift}-Generatoren]
+  Die Rekursionsvorschrift für einen \textsc{Xorshift}-Generator ist gegeben durch
+  \begin{equation}
+    \label{eq:2}
+    \begin{split}
+      r & ≠ 0 \\
+      r ← r & ∧ (r ≫ a₁), \\
+      r ← r & ∧ (r ≪ a₂), \\
+      r ← r & ∧ (r ≫ a₃).
+    \end{split}
+  \end{equation}
+  Für \num{32}-bit \textit{unsigned} Integer hat der Generator bei der richtigen Wahl der Parameter $aᵢ$ eine Periodenlänge von $2^{32} - 1$.
+  Aufgrund der fehlenden, nativen Darstellung von \textit{unsigned} Integer-Zahlen in Fortran, wird die Darstellung auf \num{30}-bit Integer beschränkt, um \textit{unsigned} Integer-Zahlen zu simulieren.
+  \begin{enumerate}[(i)]
+  \item Implementieren Sie den \textsc{Xorshift} wie in der vorherigen Aufgabe.
+    Bilden Sie nach der Rekursionsvorschrift in~\cref{eq:2} die Zufallszahl $r$ mit der Fortran-Prozedur \texttt|modulo| und dem Divisor $2^{30}$ auf eine 30-bit Integer-Zahl ab.
+    Teilen Sie durch $m = 2^{30}$, um einen \textit{floating point} Generator für Zufallszahlen in $[0, 1)$ zu erhalten.
+  \item Untersuchne Sie für die drei Parametersätze:
+    \begin{enumerate}[(a)]
+    \item\label{item:7} $r₀ = 1234, a₁ = 13, a₂ = 17, a₃ = 5$,
+    \item\label{item:5} $r₀ = 1234, a₁ = 3, a₂ = 25, a₃ = 24$,
+    \item\label{item:6} $r₀ = 1234, a₁ = 11, a₂ = 21, a₃ = 13$,
+    \end{enumerate}
+    Ihren Generator auf Gleichverteilung (s.o.).
+  \item Testen Sie die vier \textit{floating point} Generatoren~(a)-(d) auf Korrelationen (s.o.).
+  \end{enumerate}
+
+  \textit{Hinweis:} Die logischen Bit-Operatoren $≪, ≫, ∧$ sind in Fortran für Integer-Zahlen als \texttt{ishft} und \texttt{ieor} definiert.
+\end{question}
+\end{document}
