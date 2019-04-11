@@ -38,6 +38,6 @@ program main
 
   ! (iii)
   x = 1.234e8
-  f = x / a
+  f = a / x
   print *, "(iii) ", f
 end program main
