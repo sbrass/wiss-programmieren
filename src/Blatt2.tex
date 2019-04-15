@@ -13,9 +13,11 @@
     r_{n + 1} = \left( a r_n + c \right) \mod m,
   \end{equation}
   selbst implementieren.
-
+  Verwenden Sie hierfür \num{64}-bit Integer-Zahlen, indem Sie den \texttt{kind}-Wert für \texttt{integer} explizit angeben.
+  Dieser ist durch den Fortran-Standard im \texttt{iso\_fortran\_env} Modul als \texttt{int64} definiert:
+  \inputminted{fortran}{../src/aufgabe03.f90}
   \begin{enumerate}[(i)]
-  \item Schreiben Sie ein Programm, um die ersten $N$ Glieder ($N < m$) der Integer-Folge $r_n$ abhängig von den vier Parametern $r₀$ (Seed), $a$ (Faktor), $c$ (Inkrement) und $m$ (Modul) zu generieren.
+  \item Schreiben Sie ein Programm, um die ersten $N$ Glieder ($N < m$) der Integer-Folge $r_n$ aus~\cref{eq:1} abhängig von den vier Parametern $r₀$ (Seed), $a$ (Faktor), $c$ (Inkrement) und $m$ (Modul) zu generieren.
     Teilen Sie durch $m$, um einen \textit{floating point} Generator für Zufallszahlen in $[0, 1)$ zu erhalten.
   \item Untersuchen Sie für die vier Parametersätze:
     \begin{enumerate}[(a)]
@@ -31,7 +33,9 @@
 \end{question}
 
 \begin{question}[subtitle=\textsc{Xorshift}-Generatoren]
-  Die Rekursionsvorschrift für einen \textsc{Xorshift}-Generator ist gegeben durch
+  Eine modernere Generation von Pseudo-Zufallszahlengeneratoren sind die \textsc{Xorshift}-Generatoren.
+  Sie beruhen auf Kombinationen von bitweisen \textsc{Xor}- und \textsc{Shift}-Operationen.
+  Die Rekursionsvorschrift für einen solchen \textsc{Xorshift}-Generator ist gegeben durch
   \begin{equation}
     \label{eq:2}
     \begin{split}
@@ -42,10 +46,11 @@
     \end{split}
   \end{equation}
   Für \num{32}-bit \textit{unsigned} Integer hat der Generator bei der richtigen Wahl der Parameter $aᵢ$ eine Periodenlänge von $2^{32} - 1$.
+
   Aufgrund der fehlenden, nativen Darstellung von \textit{unsigned} Integer-Zahlen in Fortran, wird die Darstellung auf \num{30}-bit Integer beschränkt, um \textit{unsigned} Integer-Zahlen zu simulieren.
   \begin{enumerate}[(i)]
   \item Implementieren Sie den \textsc{Xorshift} wie in der vorherigen Aufgabe.
-    Bilden Sie nach der Rekursionsvorschrift in~\cref{eq:2} die Zufallszahl $r$ mit der Fortran-Prozedur \texttt|modulo| und dem Divisor $2^{30}$ auf eine 30-bit Integer-Zahl ab.
+    Bilden Sie nach der Rekursionsvorschrift in~\cref{eq:2} die Zufallszahl $r$ mit der Fortran-Prozedur \texttt{modulo} und dem Divisor $2^{30}$ auf eine 30-bit Integer-Zahl ab.
     Teilen Sie durch $m = 2^{30}$, um einen \textit{floating point} Generator für Zufallszahlen in $[0, 1)$ zu erhalten.
   \item Untersuchne Sie für die drei Parametersätze:
     \begin{enumerate}[(a)]
