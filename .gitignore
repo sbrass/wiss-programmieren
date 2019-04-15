@@ -1,5 +1,8 @@
-*.o
-*/*.o
-*.mod
-*/*.mod
-build/
+*
+!src/*.tex
+!.gitignore
+!Makefile
+!SConstruct
+!*/*.f90
+!*/Makefile
+!*/*.py
