@@ -1,6 +1,8 @@
 FC=gfortran
 FCFLAGS=-O2 -Wall -Werror -pedantic -std=f2008ts
 
+all: aufgabe3 aufgabe4
+
 aufgabe3: aufgabe3-1 aufgabe3-2 aufgabe3-3 aufgabe3-4
 	./aufgabe3-1 > aufgabe3-1.dat && \
 	./aufgabe3-2 > aufgabe3-2.dat && \
@@ -8,8 +10,12 @@ aufgabe3: aufgabe3-1 aufgabe3-2 aufgabe3-3 aufgabe3-4
 	./aufgabe3-4 > aufgabe3-4.dat && \
 	./plot.py aufgabe3-1.dat && \
 	./plot.py aufgabe3-2.dat && \
-	./plot.py aufgabe3-3.dat
-	./plot.py aufgabe3-4.dat
+	./plot.py aufgabe3-3.dat && \
+	./plot.py aufgabe3-4.dat && \
+	./plot3d.py aufgabe3-1.dat && \
+	./plot3d.py aufgabe3-2.dat && \
+	./plot3d.py aufgabe3-3.dat && \
+	./plot3d.py aufgabe3-4.dat
 
 aufgabe4: aufgabe4-1 aufgabe4-2 aufgabe4-3
 	./aufgabe4-1 > aufgabe4-1.dat && \

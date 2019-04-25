@@ -1,6 +1,4 @@
 program main
-  use rng
-
   implicit none
 
   integer :: ri, rj
@@ -9,13 +7,13 @@ program main
   integer :: i
 
   rj = 1234
-  a = 137
-  c = 187
-  m = 256
+  a = 20
+  c = 120
+  m = 6075
 
-  do i = 1, 127
-     ri = lcg (rj, a, c, m)
-     rj = lcg (ri, a, c, m)
+  do i = 1, 1000
+     ri = mod (a * rj + c, m)
+     rj = mod (a * ri + c, m)
      print *, ri / real(m), rj / real(m)
   end do
 end program main

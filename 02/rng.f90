@@ -12,7 +12,7 @@ contains
     integer, intent(in) :: a
     integer, intent(in) :: c
     integer, intent(in) :: m
-    r = modulo (a * state + c, m)
+    r = mod (a * state + c, m)
   end function lcg
 
   real function lcg01 (state, a, c, m) result (r)
@@ -31,6 +31,7 @@ contains
     r = ieor (state, ishft (state, a1))
     r = ieor (r, ishft (r, -a2))
     r = ieor (r, ishft (r, a3))
+    !! Modulo: respect sign of divisor.
     r = modulo (r, 2**30)
   end function xorshift
 
@@ -42,6 +43,6 @@ contains
     r = ieor (state, ishft (state, a1))
     r = ieor (r, ishft (r, -a2))
     r = ieor (r, ishft (r, a3))
-    r = modulo (r, 2_i64**62)
+    r = mod (r, 2_i64**62)
   end function xorshift64
 end module rng
