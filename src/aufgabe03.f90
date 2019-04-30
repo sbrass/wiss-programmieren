@@ -1,0 +1,3 @@
+use :: iso_fortran_env, only: i64 => int64
+! ...
+integer(i64) :: a, b, c, r0

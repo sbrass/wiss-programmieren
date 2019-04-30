@@ -1,0 +1,87 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 3}
+\date{Ausgabe: Di, 30.04.2019, Besprechung: Fr, 03.05.2019}
+\setcounter{question}{5}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Erzeugung von beliebigen Verteilungen]
+  Ein Zufallszahlengenerator, der gleichverteilte Zufallszahlen auf dem Intervall $[0, 1]$ erzeugt, kann auch eingesetzt werden, um beliebige Verteilungen zu erzeugen.
+
+  \begin{description}
+  \item[Die Inversionsmethode] definiert die Quantilenfunktion
+    \begin{equation}
+      F^{-1} ≔ \inf \{ x ∈ Ω | F(x) ≥ u \}
+    \end{equation}
+    für eine Wahrscheinlichkeitsverteilung $F(x)$ und der dazugehörigen Wahrscheinlichkeitsdichte $f(x) = \sfrac{\symup{d}}{\symup{dx}} F(x)$.
+    Sei nun $u ∈ [0, 1]$ eine gleichverteilte Zufallszahl, dann ist $x = F^{-1}(u)$ eine reelle Zufallszahl, die der Verteilungsfunktion $F(x)$ genügt.
+    Weiterhin, sei die Verteilungsfunktions $F: Ω \mapsto [0, 1]$ \textit{streng} monoton wachsend, dann stimmt die Quantilenfunktion $F^{-1}(x)$ mit der analytischen Umkehrfunktion $F^{-1}: [0, 1] \mapsto Ω$ überein.
+  \item[Der Box--Muller-Algorithmus] wird angewandt, um eine Gauß-Verteilung zu erzeugen, für welche es keine analytisch-geschlossene Umkehrfunktion gibt.
+    Mit zwei, gleichverteilten Zufallszahlen $u₁, u₂ ∈ [0, 1]$ können durch
+    \begin{align}
+      y₁ & = \sqrt{-2 \log u₁} \cos(2π u₂), \\
+      y₂ & = \sqrt{-2 \log u₁} \sin(2π u₂),
+    \end{align}
+    zwei unabbhängige, Gauß-verteile Zufallszahlen $y₁, y₂$ mit Mittelwert $μ = 0$ und Standardabweichung $σ² = 1$ erzeugt werden.
+
+  \item[Der zentrale Grenzwert-Satz] kann genutzt werden, um Gauß-verteilte Zufallszahlen zu erzeugen:
+    \blockquote{Die Summe vieler, unabhängiger, identisch verteilter Zufallsvariablen ist Gauß-verteilt.}
+    Um Gauß-verteilte Zufallszahlen $y$ zu erhalten, werden $N$ gleichverteilte Zufallsvariablen $uᵢ ∈ [0, 1]$ zu $y = ∑_{i = 1}^N uᵢ - \sfrac{N}{2}$ addiert, mit Mittelwert $μ = 0$ und $σ² = \sfrac{N}{12}$.
+
+  \item[Die Rückweisungsmethode] kann für beliebige Verteilungsfunktionen angewendet werden, insbesondere, wo die Umkehrfunktion nicht bekannt ist oder es sonst keine Möglichkeit zur Bestimmung der Verteilung gibt.
+    Die zu erzeugende Verteilung mit Wahrscheinlichkeitsdichte $f(x)$ wird durch eine Vergleichswahrscheinlichkeitsdichte $g(x)$ und der Konstante $C > 1$ eingehüllt, sodass gilt, $p(x) ≤ C · g(x), ∀x$.
+    Die Vergleichswahrscheinlichkeitsdichte $g(x)$ sollte dabei sogewählt werden, dass man Zufallszahlen $x$ entsprechend von $g(x)$ mit der Transformationsmethode erzeugen kann.
+
+    Der Algorithmus für die Rückweisungsmethoden lautet:
+    \begin{enumerate}[(i)]
+    \item Ziehe eine Zufallszahl $x$ aus der Verteilung $g(x)$.
+    \item Ziehe eine Zufallszahl $y$, die gleichverteilt im Interval $[0, C g(x)]$ ist.
+    \item Akzeptiere das Tupel $(x, y)$, wenn $y ≤ p(x)$, dann ist $x$ gemäß $p(x)$ verteilt. Ansonsten, verwerfe das Tupel und wiederhole.
+    \end{enumerate}
+    Desto ähnlicher sich $f(x)$ und $g(x)$ sind desto höher ist die Akzeptanzrate (Effizienz) des Algorithmus.
+  \end{description}
+
+  Erzeugen Sie folgende Verteilung:
+  \begin{enumerate}[(i)]
+  \item Benutzen Sie den Box--Muller-Algorithmus, um eine Gauß-Verteilung mit Varianz \num{1} und Mittelwert \num{0} zu erzeugen.
+  \item Benutzen Sie den zentralen Grenzwert-Satz, um eine Gauß-Verteilung zu erzeugen.
+    Bilden Sie hierfür die Summe von $N$ (geeignet wählen) gleichverteilten Zufallszahlen aus dem Intervall $[0, 1]$. Wie bekommt man eine Verteilung mit Mittelwert \num{0} und Standardabweichung \num{0}?
+    Welche Nachteile hat diese Methode, z.\, B.\ in Korrekteit und Effizienz?
+  \item Benutzen Sie die Rückweisungsmethode, um die Verteilung $p₁(x) = \sfrac{\sin(x)}{2}$ in den Grenzen \num{0}~bis~$π$ zu erzeugen.
+  \item Benutzen Sie die Transformationsmethode, um die Verteilung $p₂(x) = 3x²$ in den Grenzen \num{0}~bis~\num{1} zu erzeugen.
+  \end{enumerate}
+  Erzeugen Sie jeweils $10⁴$ Zufallszahlen und erstellen Sie ein Histogram, wo die Häufigkeit $p(xᵢ)$ der um $xᵢ$ zentrierten Bins der Länge $Δx$ gemäß $∑ᵢ p(xᵢ)Δx$ normiert werden sollen.
+  Plotten Sie auch die zugehörige normierte analytische Verteilung.
+\end{question}
+
+\begin{question}[subtitle=$χ²$- oder Gleichverteilungstest]
+  Pseudo-Zufallszahlengeneratoren sollten neben dem Korrelationstest von Marsaglia mit einer Vielzahl weiterer statistischer Tests untersucht werden.
+
+  Ein weiterer solcher Test ist der $χ²$- oder Gleichverteilungstest.
+  Hierfür wir das Intervall $[0, 1]$ in $M$ Abschnitte gleicher Länge unterteilt.
+  Es werden $N$ Zufallszahlen generiert und über die $M$ Abschnitte histogrammiert, so dass für jeden Abschnitt $i ∈ \{1, …, M\}$ die Anzahl der Zufallszahlen $nᵢ$ bekannt ist.
+
+  Der erwartete Mittelwert über viele Iterationen für $nᵢ$ ist
+  \begin{equation}
+    \langle nᵢ \rangle = \frac{N}{M},
+  \end{equation}
+  da die $nᵢ$ Poisson-verteilt sein sollen, ist die Varianz $V(nᵢ) = \langle (nᵢ - \langle nᵢ \rangle)² \rangle = \langle nᵢ \rangle = \frac{N}{M}$.
+
+  Aus der Nebenbedingung, dass für die $M$ Werte $nᵢ$ gilt $∑_{i = 1}^M nᵢ = N$, folgt, dass es nur $(M - 1)$ Freiheitsgrade gibt.
+  Damit lässt sich der $χ²$-Wert bestimmen
+  \begin{equation}
+    χ² = ∑_{i = 1}^M \frac{(nᵢ - \langle nᵢ \rangle)²}{\langle  nᵢ \rangle} = M - 1.
+  \end{equation}
+  Eine Abweichung von diesem Wert, deutet daraufhin, dass die Zufallszahlen nicht gleichverteilt sind.
+
+  \begin{enumerate}[(i)]
+  \item Implementieren Sie das Histogramm über die $nᵢ$ als ein-dimensionalen Integer-Array mit der Größe $M$.
+    Bestimmen Sie den entsprechend Abschnitt $k$ mit $k = \lfloor r \rfloor + 1$ und benutzen Sie als Gewicht \num{1} zum Histogrammieren.
+  \item Implementieren Sie den Mittelwert und die Varianz von $nᵢ$ mithilfe von einem zwei-dimensionalen Array der Größe $(2, M)$, wobei in den Indizes $(1, i)$ die Mittelwerte von $nᵢ$ und in den Indizes $(2, i)$ die Varianz von $nᵢ$ gespeichert werden sollen. Nutzen Sie Welford's Algorithmus zur Bestimmung des Mittelwertes und der Varianz von $nᵢ$.
+    Bestimmen Sie die Mittelwerte und die Varianzen für $nᵢ$ und sowie $χ²$ über \num{15} Iterationen mit den Werten $M = 100$ und $N = 1000$ für jeweils einen (ausgewählten) linear kongruenten Generator und einen \textsc{Xorshift}-Generator aus Übungsblatt~2.
+  \item Entsprechen bei beiden Zufallszahlengeneratoren die Mittelwerte und die Varianzen von $nᵢ$ mit der Vorhersage überein? Bestehen beide den $χ²$-Test?
+  \end{enumerate}
+  \inputminted{fortran}{../src/aufgabe07.f90}
+\end{question}
+\end{document}
