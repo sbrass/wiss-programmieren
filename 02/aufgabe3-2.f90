@@ -1,10 +1,11 @@
 program main
+  use iso_fortran_env, only: i64 => INT64, r64 => REAL64
   use rng
 
   implicit none
 
-  integer :: ri, rj
-  integer :: a, c, m
+  integer(i64) :: ri, rj
+  integer(i64) :: a, c, m
 
   integer :: i
 
@@ -16,6 +17,6 @@ program main
   do i = 1, 127
      ri = lcg (rj, a, c, m)
      rj = lcg (ri, a, c, m)
-     print *, ri / real(m), rj / real(m)
+     print *, ri / real(m, r64), rj / real(m, r64)
   end do
 end program main

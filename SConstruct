@@ -6,5 +6,6 @@ VariantDir('build', 'src')
 env = Environment(ENV=os.environ,
                   PDFLATEX='lualatex',
                   PDFLATEXFLAGS='--interaction=nonstopmode --halt-on-error --recorder --shell-escape')
-pdfiles = env.PDF (['build/Blatt{}.tex'.format(i) for i in [1, 2, 8]])
-env.Clean(pdfiles, ['*.log', '*.xml', '*.aux', '*.tex'])
+pdffiles = env.PDF (['build/Blatt{}.tex'.format(i) for i in [1, 2, 3, 8]])
+# pdffiles = env.PDF(['build/Blatt1.tex', 'build/Blatt2.tex'])
+env.Clean(pdffiles, ['*.log', '*.xml', '*.aux', '*.tex'])
