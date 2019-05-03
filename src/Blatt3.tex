@@ -39,17 +39,17 @@
     \item Ziehe eine Zufallszahl $y$, die gleichverteilt im Interval $[0, C g(x)]$ ist.
     \item Akzeptiere das Tupel $(x, y)$, wenn $y ≤ p(x)$, dann ist $x$ gemäß $p(x)$ verteilt. Ansonsten, verwerfe das Tupel und wiederhole.
     \end{enumerate}
-    Desto ähnlicher sich $f(x)$ und $g(x)$ sind desto höher ist die Akzeptanzrate (Effizienz) des Algorithmus.
+    Je ähnlicher sich $f(x)$ und $g(x)$ sind, desto höher ist die Akzeptanzrate (Effizienz) des Algorithmus.
   \end{description}
 
-  Erzeugen Sie folgende Verteilung:
+  Erzeugen Sie folgende Verteilungen:
   \begin{enumerate}[(i)]
   \item Benutzen Sie den Box--Muller-Algorithmus, um eine Gauß-Verteilung mit Varianz \num{1} und Mittelwert \num{0} zu erzeugen.
   \item Benutzen Sie den zentralen Grenzwert-Satz, um eine Gauß-Verteilung zu erzeugen.
     Bilden Sie hierfür die Summe von $N$ (geeignet wählen) gleichverteilten Zufallszahlen aus dem Intervall $[0, 1]$. Wie bekommt man eine Verteilung mit Mittelwert \num{0} und Standardabweichung \num{0}?
     Welche Nachteile hat diese Methode, z.\, B.\ in Korrekteit und Effizienz?
   \item Benutzen Sie die Rückweisungsmethode, um die Verteilung $p₁(x) = \sfrac{\sin(x)}{2}$ in den Grenzen \num{0}~bis~$π$ zu erzeugen.
-  \item Benutzen Sie die Transformationsmethode, um die Verteilung $p₂(x) = 3x²$ in den Grenzen \num{0}~bis~\num{1} zu erzeugen.
+  \item Benutzen Sie die Inversionsmethode, um die Verteilung $p₂(x) = 3x²$ in den Grenzen \num{0}~bis~\num{1} zu erzeugen.
   \end{enumerate}
   Erzeugen Sie jeweils $10⁴$ Zufallszahlen und erstellen Sie ein Histogram, wo die Häufigkeit $p(xᵢ)$ der um $xᵢ$ zentrierten Bins der Länge $Δx$ gemäß $∑ᵢ p(xᵢ)Δx$ normiert werden sollen.
   Plotten Sie auch die zugehörige normierte analytische Verteilung.
@@ -77,10 +77,11 @@
 
   \begin{enumerate}[(i)]
   \item Implementieren Sie das Histogramm über die $nᵢ$ als ein-dimensionalen Integer-Array mit der Größe $M$.
-    Bestimmen Sie den entsprechend Abschnitt $k$ mit $k = \lfloor r \rfloor + 1$ und benutzen Sie als Gewicht \num{1} zum Histogrammieren.
+    Bestimmen Sie den entsprechend Abschnitt $k$ mit $k = \lfloor r \rfloor + 1$, wobei $r ∈ [0, 1]$ und $\lfloor · \rfloor$ (Fortran: \mintinline{fortran}|floor|) der Abrundungsoperator ist.
+    Benutzen Sie als Gewicht \num{1} zum Histogrammieren.
   \item Implementieren Sie den Mittelwert und die Varianz von $nᵢ$ mithilfe von einem zwei-dimensionalen Array der Größe $(2, M)$, wobei in den Indizes $(1, i)$ die Mittelwerte von $nᵢ$ und in den Indizes $(2, i)$ die Varianz von $nᵢ$ gespeichert werden sollen. Nutzen Sie Welford's Algorithmus zur Bestimmung des Mittelwertes und der Varianz von $nᵢ$.
     Bestimmen Sie die Mittelwerte und die Varianzen für $nᵢ$ und sowie $χ²$ über \num{15} Iterationen mit den Werten $M = 100$ und $N = 1000$ für jeweils einen (ausgewählten) linear kongruenten Generator und einen \textsc{Xorshift}-Generator aus Übungsblatt~2.
-  \item Entsprechen bei beiden Zufallszahlengeneratoren die Mittelwerte und die Varianzen von $nᵢ$ mit der Vorhersage überein? Bestehen beide den $χ²$-Test?
+  \item Entsprechen bei beiden Zufallszahlengeneratoren die Mittelwerte und die Varianzen von $nᵢ$ mit der Vorhersage überein? Bestehen beide den $χ²$-Test? Welche Auswirkung hat die Wahl von $M$ und $N$ auf den Ausgang des Tests?
   \end{enumerate}
   \inputminted{fortran}{../src/aufgabe07.f90}
 \end{question}
