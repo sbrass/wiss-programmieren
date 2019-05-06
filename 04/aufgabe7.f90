@@ -44,6 +44,11 @@ contains
     real(r64) :: z
     real(r64) :: x, y, fx, fz
     !! \todo{sbrass} Check existence of root, f(a) * f(b) < 0.
+    if (f(x0) * f(y0) > 0) then
+       print *, "Funktion hat keine Nullstelle im Intervall [", x0, y0, "]."
+       z = 0
+       return
+    end if
     x = x0; y = y0
     z = (x0 + y0) / 2
     do while (y - x > eps)
