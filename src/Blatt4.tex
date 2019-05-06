@@ -1,0 +1,71 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 4}
+\date{Ausgabe: Fr, 03.05.2019, Besprechung: Fr, 10.05.2019}
+\setcounter{question}{6}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Fixpunktsatz von Banach]
+  Der Fixpunktsatz von Banach gibt an unter welchen Bedingungen eine selbst-abbildende Funktionsvorschrift gegen einen Fixpunkt konvergiert.
+  Eine Anwendung des Fixpunktsatz von Banach sind die Methoden zur Bestimmung von Nullstellen, bzw. das Lösen von nicht-linearen Gleichungen.
+
+  Ein solches Lösungsverfahren stellt die Methode der Intervallhalbierung dar:
+  \begin{enumerate}[1)]
+  \item Angenommen, es seien Nullstelle(n) in einem Intervall \textquote{eingeklammert}, d.h. $x₀$ und $y₀ (> x₀)$ liegen so, dass $f(x)$ auf $[x₀, y₀]$ einen Vorzeichenwechsel aufweist: $f(x₀) · f(y₀) < 0$.
+  \item Berechne $z_{n + 1} = \frac{x_n + y_n}{2}$.
+  \item Wenn $f(z_{n + 1}) · f(x_n) < 0$, dann setze $x_{n + 1} = x_n ∧ y_{n + 1} = z_{n + 1}$, sonst setze $x_{n + 1} = z_{n + 1} ∧ y_{n + 1} = y_n$.
+  \item Breche ab, wenn das Genauigkeitsziel $ε_{n + 1} ≔ y_{n + 1} - x_{n + 1} < ε$ erreicht ist, ansonsten wiederhole ab 2).
+  \end{enumerate}
+
+  Finden Sie alle reellen Lösungen zu folgenden Gleichungen (wählen Sie als Genauigkeitsziel $ε = 10^{-8}$):
+  \begin{enumerate}[(i)]
+  \item $f(x) = 0.5 x³ - 2 x² + x + 1 = 0$,
+  \item $g(x) = h(x)$, mit $g(x) = 3x + \sin x ∧ h(x) = \exp x$.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Bifurkationsdiagramme]
+  Iterative Verfahren sollen meist dazuführen, dass sie zu einer eindeutigen Lösung, dem Fixpunkt, konvergieren.
+  Die Voraussetzung für die Konvergenz liefert der Fixpunktsatz von Banach.
+  Was passiert, wenn eine Abildung diese Voraussetzung nicht auf ihrem ganzen Definitionsbereich erfüllt, kann anhand der logistischen und der kubischen Abbildung untersucht werden.
+
+  Berechnen und plotten Sie die Bifurkationsdiagramme, wo Sie $x_n$ gegen $r$ auftragen, für die Abbildungen
+  \begin{align}
+    x_{n + 1} & = r x_n (1 - x_n), \, x ∈ [0, 1],\, \text{(logistische Abbildung)}, \\
+    x_{n + 1} & = r x_n - x_n³, \, x_n ∈ [-\sqrt{1 + r}, \sqrt{1 + r}], \, \text{(kubische Abbildung)},
+  \end{align}
+  durch numerische Iteration.
+
+  Gehen Sie dabei folgendermaßen vor:
+  \begin{enumerate}[(i)]
+  \item  Vergrößern Sie den Parameter $r$ in kleinen Schritten in einem Bereich $0 < r < r_{\text{max}}$.
+    Was passiert, wenn Sei $r$ zu groß wählen und welche $r_{\text{max}}$ ergeben sich?
+  \item Wählen Sie einen Startpunkt $x₀$ im Intervall $[0, 1]$ zufällig aus (Fortran: \mintinline{fortran}|random_number|) und iterieren Sie für jedes $r$ die Abbildung für $N = 100$, damit sich ein Fixpunkt oder ein sogenannter Orbit einstellt.
+    Iterieren Sie dann für weitere $M = 300$, jeder Punkt eines Orbits ergibt einen Punkt im Bifurkationsdiagramm.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Feigenbaum-Konstante]
+  Die Fixpunkt-Gleichung für die $2^n$-fach iterierte logistische Abbildung $f(r, x) = rx(1 - x)$,
+  \begin{equation}
+    x_{2^n} = f^{2^n}(r, x) = f(r, f(r, …f(r, x₀))),
+  \end{equation}
+  gibt für $r < r_∞ = 3.569945…$ die Werte eines Orbits der Länge $2^n$ im Periodenverdopplungsszenario nach Feigenbaum.
+
+  Bestimmen Sie für $n = 1, 2, 3$ numerisch die Werte $r = R_n < r_∞$, für die superstabile Fixpunkte existieren. Diese Werte erfüllen die Gleichung
+  \begin{equation}
+    \frac{1}{2} = f^{2^n}\left( r, \frac{1}{2} \right).
+  \end{equation}
+  \begin{enumerate}[(i)]
+  \item Plotten Sie zunächst $g_n(r)≡\sfrac{1}{2} - f^{2^n} (r, \sfrac{1}{2})$ als Funktion von $r$ für $n = 0, 1, 2, 3$ im Bereich $0 < r < r_∞$.
+    Wird $n$ um \num{1} vergrößert, kommt jeweils eine Nullstelle von $g_n(r)$ bei $r = R_n$ hinzu.
+    Machen Sie die Schrittweite in ihrem Plot so klein, dass Sie Schranken für die Nullstellen angeben können.
+  \item Bestimmen Sie numerisch mit Hilfe der Methode der Intervallhalbierung ausgehend von diesen Schranken die Nullstellen $R_n$ von $g_n(r)$ für $n = 0, 1, 2, 3$.
+  \item Gewinnen Sie aus Ihren Ergebnissen eine erste Schätzung der Feigenbaum-Konstante:
+    \begin{equation}
+      δ = \lim_{n → ∞} \frac{R_{n - 1} - R_{n - 2}}{R_n - R_{n - 1}}.
+    \end{equation}
+  \end{enumerate}
+\end{question}
+\end{document}
