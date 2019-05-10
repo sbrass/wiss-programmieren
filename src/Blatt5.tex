@@ -1,6 +1,6 @@
 \input{header.tex}
 \NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 5}
-\date{Ausgabe: Fr, 10.05.2019, Besprechung: Mo, 17.05.2019}
+\date{Ausgabe: Fr, 10.05.2019, Besprechung: Fr, 17.05.2019}
 \setcounter{question}{9}
 \begin{document}
 
@@ -9,48 +9,48 @@
 \begin{question}[subtitle=Numerische Differentiation]
 Die erste Ableitung einer Funktion $f(x)$ wird durch den kontinuierlichen Grenzprozess
 \begin{equation}
-  f^{'}(x) = \lim_{h → 0} \frac{f(x+h) - f(x)}{h}
+  f^{\prime}(x) = \lim_{h → 0} \frac{f(x+h) - f(x)}{h}
 \end{equation}
 definiert, welcher im Computer nicht ausgeführt werden kann.
 Für numerische Anwendungen kann der Differenzenquotient daher naiv
 \begin{equation}
-  f^{'}(x) ≈ \frac{f(x + h) - f(x)}{h} + \symcal{O}(h)
+  f^{\prime}(x) = \frac{f(x + h) - f(x)}{h} + \symcal{O}(h)
 \end{equation}
 mit einem hinreichend kleinem $h$ angenähert werden.
-Der Abbruchfehler $R(f^{'})$ ist durch
+Der Abbruchfehler $R(f^{\prime})$ ist durch
 \begin{equation}
-  R(f^{'}) = \left| \frac{1}{2} f^{''}(x) h \right| \overset{!}{=} \symcal{O}(h)
+  R(f^{\prime}) = \left| \frac{1}{2} f^{\prime\prime}(x) h \right| \overset{!}{=} \symcal{O}(h)
 \end{equation}
 gegeben.
 
 Eine verbesserte Variante stellt der Differenzenquotient mit zwei symmetrischen Punkten $x ± h$ dar:
 \begin{equation}
- f^{'}(x) ≈ \frac{f(x + h) - f(x - h)}{2h} + \symcal{O}(h²),
+ f^{\prime}(x) = \frac{f(x + h) - f(x - h)}{2h} + \symcal{O}(h²),
 \end{equation}
 mit dem Abbruchfehler
 \begin{equation}
-  R(f^{'}) = \left| \frac{1}{6} f^{'''}(x) h² \right| \overset{!}{=} \symcal{O}(h²).
+  R(f^{\prime}) = \left| \frac{1}{6} f^{\prime\prime\prime}(x) h² \right| \overset{!}{=} \symcal{O}(h²).
 \end{equation}
 
 Eine noch aufwendigere Formel ist die symmetrische Vierpunkt-Formel:
 \begin{equation}
-  f^{'} (x) = \frac{f(x - 2h) - 8f(x + h) + 8f(x + h) - f(x + 2h)}{12 h} + \symcal{O}(h⁴),
+  f^{\prime} (x) = \frac{f(x - 2h) - 8f(x - h) + 8f(x + h) - f(x + 2h)}{12 h} + \symcal{O}(h⁴),
 \end{equation}
-welche jedoch aufgrund der Auswertung von $f(x)$ an vier Punkten in der Praxis nicht verwendet wird.
+welche jedoch aufgrund der Auswertung von $f(x)$ an vier Punkten kaum Anwendung findet in der Praxis.
 
 Für die zweite Ableitung erhält man als doppelten Differenzenquotienten:
 \begin{equation}
-  f^{''}(x) = \frac{f(x + h) - 2f(x) + f(x - h)}{h²} + \symcal{O}(h²).
+  f^{\prime\prime}(x) = \frac{f(x + h) - 2f(x) + f(x - h)}{h²} + \symcal{O}(h²).
 \end{equation}
 
 \begin{enumerate}[(i)]
 \item Implementieren Sie einen abstrakten Datentypen \mintinline{fortran}{basic_func_t}, welcher eine deferred Typ-gebundene Prozedure \mintinline{fortran}{evaluate} besitzt, welche als Funktion ein Argument $x$ vom Datentyp \mintinline{fortran}{real} und \mintinline{fortran}{intent(in)} erhält und als Rückgabewert $y$ vom Datentyp \mintinline{fortran}{real} zurückgibt.
-\item Implementieren Sie als Erweiterung des Datentyp \mintinline{fortran}{basic_func_t} die Funktion $f(x) = ax^n$ mit den beiden Parameter $a$ und $n$ als Datentyp \mintinline{fortran}{polynom_func_t}, welche als Datenfelder $a$ und $n$ vom Datentyp \mintinline{fortran}{real} besitzt.
-\item Implementieren Sie für den abgeleiteten Datentyp \mintinline{fortran}{polynom_func_t} eine Typ-gebundene Prozedure \mintinline{fortran}{init} und \mintinline{fortran}{write} als Subroutinen.
+\item Implementieren Sie als Erweiterung des abstrakten Datentyp \mintinline{fortran}{basic_func_t} die Funktion $f(x) = ax^n$ mit den beiden Parameter $a$ und $n$ als Datentyp \mintinline{fortran}{polynom_func_t}, welche als Datenfelder $a$ und $n$ vom Datentyp \mintinline{fortran}{real} besitzt.
+\item Implementieren Sie für den abgeleiteten Datentyp \mintinline{fortran}{polynom_func_t} eine Typ-gebundene Prozedure \mintinline{fortran}{init} und \mintinline{fortran}{write} als Subroutinen, sowie die deferred Typ-gebundene Prozedure \mintinline{fortran}{evaluate}
   Die Prozedure \mintinline{fortran}{init} übernimmt als Argumente $a$ und $n$ und setzt diese in den entsprechenden Datenfelder ein.
   Die Prozedure \mintinline{fortran}{write} hat keine Argumente, sondern schreibt nur die beiden Parameter $a$ und $n$ auf die Standardausgabe.
-\item Schreiben Sie ein Programm, welches die naive Ableitung, Ableitung mit den zwei symmetrischen Punkten und den vier symmetrischen Punkten der Funktion $f(x) = 0.5 x³$ implementiert als Datentyp \mintinline{fortran}{polynom_func_t} bestimmt.
-  Plotten Sie $f^{'}(1)$ gegen $h$, variieren Sie hierfür $h$ im Bereich von $[10^{-10}, 0)$.
+\item Schreiben Sie ein Programm, welches die naive Ableitung, die Ableitung mit den zwei symmetrischen Punkten und den vier symmetrischen Punkten der Funktion $f(x) = 0.5 x³$ implementiert als Datentyp \mintinline{fortran}{polynom_func_t} bestimmt.
+  Plotten Sie $f^{\prime}(1)$ gegen $h$, variieren Sie hierfür $h$ logarithmisch im Bereich von $[10^{-7}, 0)$.
 \item Implementieren Sie den doppelten Differenzenquotienten ähnlich.
 \end{enumerate}
 \end{question}
@@ -66,15 +66,16 @@ Für die zweite Ableitung erhält man als doppelten Differenzenquotienten:
     \begin{align}
       H₀ (x) & = 1,\\
       H₁ (x) & = 2x, \\
-      H_{n + 1} & = 2x H_n(x) - 2n H_{n - 1} (x).
+      H_{n + 1} (x) & = 2x H_n(x) - 2n H_{n - 1} (x).
     \end{align}
     Plotten Sie einige Hermite-Polynome $H_n$ und die Wellenfunktion $ψ_n$ für $
     =$ \numlist{1;2;5;42}.
   \item Überprüfen Sie die Differentialgleichung, welche die Hermite-Polynome lösen,
     \begin{equation}
-     H^{''}_{n} (x) - 2x H^{'}_n(x) + 2nH_n(x) = 0,
+     H^{\prime\prime}_{n} (x) - 2x H^{\prime}_n(x) + 2nH_n(x) = 0,
    \end{equation}
    mittels numerischer Differentiation für $n =$ \numlist{1;2;5}.
   \end{enumerate}
+  \textit{Hinweis}: Bestimmen Sie vorab die Koeffizienten $a_{n, k}$ des Hermite-Polynom $H_{n}(x) = ∑_{k = 0}^n a_{n, k} x^k$ aus der Rekursionsformel. Inbesondere, werwenden Sie 64-bit Floating-Point- und Integer-Zahlen, sowie die Kennzeichung \mintinline{fortran}{recursive} für sich selbstaufrufende Prozeduren.
 \end{question}
 \end{document}
