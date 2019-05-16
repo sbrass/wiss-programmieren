@@ -1,0 +1,74 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 6}
+\date{Ausgabe: Fr, 16.05.2019, Besprechung: Fr, 21.05.2019}
+\setcounter{question}{11}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Numerische Integration]
+
+  Die Integration ist ähnlich wie die Differentiation über einen Grenzprozess, z.\,Bsp. als Grenzwert der Riemann-Summe, definiert,
+  \begin{equation}
+    ∫_a^b f(x)\, \symup{d} x = \lim_{h → 0} ∑_{k = 1}^{N(h)} h f(xₖ) \quad \text{mit } xₖ = a + kh \text{ und } N(h) = \frac{b - a}{h},
+  \end{equation}
+  der so jedoch im Computer nicht ausgeführt werden kann.
+  Zur numerischen Näherung des Integrals geht man daher folgendermaßen vor:
+  \begin{enumerate}
+  \item Das Intervall $[a, b]$ wird in $N$ Teilintervalle der Länge $h = \sfrac{b - a}{N}$ zerlegt.
+  \item Das Integral $∫_{xₖ}^{xₖ + h} f(x) \, \symup{d}x$ wird im Teilintervall $k$ mithilfe einer Taylor-Entwicklung des Integranden zur $n$-ten Ordnung berechnet.
+  \item Der Fehler der resultierenden Integrationsformel kann systematisch mit der Euler--McLaurin Formel abgeschätzt werden.
+  \end{enumerate}
+  Die verschiedenen Integrationsregel unterscheiden sich in der Wahl der Stützstellen $xₖ$, sowie der Ordnung der Taylor-Entwicklung und ihrer Fehlerabschätzung.
+  \begin{description}
+  \item[Trapezregel]
+    Für die Trapezregel wird der Integrand zu ersten Ordnungn genähert und am Rand der Teilintervalle ausgewertet.
+    Die Fehlerabschätzung hängt u.a.\ von der Anzahl der Teilintervalle ab und ist von der Ordnung $\symcal{O}(N^{-2})$.
+    \begin{equation}
+      ∫_a^b f(x) \,\symup{d}x = h ∑_{k = 1}^{N - 1} f(xₖ) + \frac{h}{2} \left( f(a) + f(b) \right) + \symcal{O}(N^{-2}), \quad \text{mit} xₖ = a + kh, N(h) = \frac{b - a}{h}.
+    \end{equation}
+  \item[Mittelpunktsregel]
+    Für die Mittelpunktsregel wird der Integrand zur ersten Ordnung genähert und in der Mitte der Teilintervalle ausgewertet. Die Fehlerabschätzung ist on der Ordnung $\symcal{O}(N^{-2})$,
+    \begin{equation}
+      ∫_a^b f(x) \, \symup{d}x = h ∑^{N}_{k = 1} f(a - \frac{h}{2} + kh) + \symcal{O}(N^{-2}).
+    \end{equation}
+  \item[Simpsonregel]
+    Für die Simpsonregel wird das Intervall $[a, b]$ in $\sfrac{N}{2}$ nebeneinanderliegende und gleich große Teilintervalle $[x_{k}, x_{k + 2}]$ mit Mittelpunkt $xₖ = \sfrac{(x_{k + 2} - x_{k})}{2}$ und Länge $2h$ zerlegt.
+    Der Integrand wird zur zweiten Ordnung entwickelt mit der Fehlerabschätzung zur Ordnung $\symcal{O}(N^{-4})$.
+    Damit ergibt sich dann,
+    \begin{equation}
+      ∫_a^b f(x) \, \symup{d}x = \frac{h}{3}\left( f(a)+ 2 \sum_{k=1}^{N-1}f(x_{2k})+ f(x_{2n}) + 4\sum_{k=1}^{N}f(x_{2k-1}) \right) + \symcal{O}(N^{-4}).
+    \end{equation}
+  \end{description}
+  \begin{enumerate}[(i)]
+  \item Implementieren Sie jeweils eine Integrationsroutine für die Trapez-, die Simpson- und die Mittelpunktsregel, and die folgende vier Argumente übergeben werden sollen: (1) Integrand f(x) als abstrakter Datentyp \mintinline{fortran}{basic_func_t}, (2) untere Grenze $a$, (3) obere Grenze $b$ und (4) Integrationsintervallbreite $h$ oder Zahl der Integrationsintervalle $N$, welcher bei der Simpsonregel gerade sein sollte.
+  \item Berechnen Sie folgende Integrale numerisch, jeweils mittels (i) Trapezregel, (ii) Simpsonregel. Halbieren Sie bei beiden Verfahren die Intervallbreite $h$ bis die relative Änderung des Ergebnisses kleiner als $10^{-4}$ wird.
+    \begin{enumerate}[a)]
+    \item
+      \begin{equation}
+        I₁ = ∫_{1}^{100} \symup{d}x\, \frac{\exp{-x}}{x}
+      \end{equation}
+    \item
+      \begin{equation}
+        I₂ = ∫_{0}^{1} \symup{d}x\, x\sin \left( \frac{1}{x} \right)
+      \end{equation}
+    \end{enumerate}
+    Zur Kontrolle: $I₁ ≈ \num{0,21938}, I₂ ≈ 0.37853$.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Uneigentliche und Hauptwert-Integrale]
+  \begin{enumerate}[(i)]
+  \item Berechnen Sie folgendes Hauptwertintegral numerisch:
+    \begin{equation}
+      I₁ = \symcal{P} ∫_{-1}^{1} \! \symup{d}t\, \frac{\exp{t}}{t}.
+    \end{equation}
+  \item Berechnen Sie folgendes Integral numerisch mit einem relativen Fehler $ε ≤ 10^{-5}$:
+    \begin{equation}
+      I₂ = ∫_0^∞ \! \symup{d}t \, \frac{\exp{-t}}{\sqrt{t}}.
+    \end{equation}
+    Berechnen Sie das Integral zum Vergleich analytisch.
+  \end{enumerate}
+  Zur Kontrolle: $I₁ ≈ \num{2.1145018}, I₂ ≈ \num{1.77245385}$.
+\end{question}
+\end{document}
