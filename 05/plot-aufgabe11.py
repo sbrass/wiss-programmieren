@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
 
-filename = "aufgabe11"
+filename = "aufgabe11-1"
 label = ['1', '2', '5', '42']
 
 pp = PdfPages('{}.pdf'.format(filename))
