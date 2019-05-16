@@ -13,6 +13,8 @@ program main
   real(r64) :: h
 
   call f%init (a = 0.5_r64, n = 3._r64)
+  !! Do not call f%write () for production run.
+  ! call f%write ()
 
   do i = 1, steps
      h = 10**((hlog(2) - hlog(1)) / steps * i + hlog(1))

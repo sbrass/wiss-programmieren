@@ -12,6 +12,7 @@ module polynom
      real(r64) :: n
    contains
      procedure :: init => polynom_func_init
+     procedure :: write => polynom_func_write
      procedure :: evaluate => polynom_func_evaluate
   end type polynom_func_t
 
@@ -23,6 +24,13 @@ contains
     polynom%a = a
     polynom%n = n
   end subroutine polynom_func_init
+
+  subroutine polynom_func_write (polynom)
+    class(polynom_func_t), intent(in) :: polynom
+    write (*, "(A)") "a * x^n"
+    write (*, *) "a = ", polynom%a
+    write (*, *) "n = ", polynom%n
+  end subroutine polynom_func_write
 
   function polynom_func_evaluate (func, x) result (y)
     class(polynom_func_t), intent(in) :: func

@@ -69,13 +69,13 @@ Für die zweite Ableitung erhält man als doppelten Differenzenquotienten:
       H_{n + 1} (x) & = 2x H_n(x) - 2n H_{n - 1} (x).
     \end{align}
     Plotten Sie einige Hermite-Polynome $H_n$ und die Wellenfunktion $ψ_n$ für $
-    =$ \numlist{1;2;5;42}.
+    = 1, 2, 5, 42$.
   \item Überprüfen Sie die Differentialgleichung, welche die Hermite-Polynome lösen,
     \begin{equation}
      H^{\prime\prime}_{n} (x) - 2x H^{\prime}_n(x) + 2nH_n(x) = 0,
    \end{equation}
-   mittels numerischer Differentiation für $n =$ \numlist{1;2;5}.
+   mittels numerischer Differentiation für $n = 1, 2, 5$.
   \end{enumerate}
-  \textit{Hinweis}: Bestimmen Sie vorab die Koeffizienten $a_{n, k}$ des Hermite-Polynom $H_{n}(x) = ∑_{k = 0}^n a_{n, k} x^k$ aus der Rekursionsformel. Inbesondere, werwenden Sie 64-bit Floating-Point- und Integer-Zahlen, sowie die Kennzeichung \mintinline{fortran}{recursive} für sich selbstaufrufende Prozeduren.
+  \textit{Hinweis}: Bestimmen Sie vorab die Koeffizienten $a_{n, k}$ des Hermite-Polynom $\smash{H_{n}(x) = ∑_{k = 0}^n a_{n, k} x^k}$ aus der Rekursionsformel. Inbesondere, werwenden Sie 64-bit Floating-Point- und Integer-Zahlen, sowie die Kennzeichung \mintinline{fortran}{recursive} für sich selbstaufrufende Prozeduren.
 \end{question}
 \end{document}
