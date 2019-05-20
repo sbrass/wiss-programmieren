@@ -23,10 +23,10 @@
     \end{equation}
     mit den $n$-ten Ableitung des Integranden $f^{(n)}$ und den Bernoulli\-/Zahlen $B_{n}$,  abgeschätzt werden.
   \end{enumerate}
-  Es existieren verschiedenen Integrationsregel, welche sich in der Wahl der Stützstellen $xₖ$, sowie der Ordnung der Taylor-Entwicklung und ihrer Fehlerabschätzung unterscheiden.
+  Es existieren verschiedene Integrationsregeln, welche sich in der Wahl der Stützstellen $xₖ$, sowie der Ordnung der Taylor-Entwicklung und ihrer Fehlerabschätzung unterscheiden.
   \begin{description}
   \item[Trapezregel]
-    Für die Trapezregel wird der Integrand zu ersten Ordnungn genähert und am Rand der Teilintervalle ausgewertet.
+    Für die Trapezregel wird der Integrand zu ersten Ordnung genähert und am Rand der Teilintervalle ausgewertet.
     Die Fehlerabschätzung hängt u.a.\ von der Anzahl der Teilintervalle ab und ist von der Ordnung $\symcal{O}(N^{-2})$.
     \begin{equation}
       ∫_a^b f(x) \,\symup{d}x = h ∑_{k = 1}^{N - 1} f(xₖ) + \frac{h}{2} \left( f(a) + f(b) \right) + \symcal{O}(N^{-2}), \quad \text{mit} \, xₖ = a + kh,\, N(h) = \frac{b - a}{h}.
@@ -41,7 +41,7 @@
     Der Integrand wird zur zweiten Ordnung entwickelt und man erhält eine Fehlerabschätzung zur Ordnung $\symcal{O}(N^{-4})$.
    Damit ergibt sich,
     \begin{equation}
-      ∫_a^b f(x) \, \symup{d}x = \frac{h}{3}\left( f(a)+ f(b) + 2 \sum_{k=1}^{N-1}f(x_{2k}) + 4\sum_{k=1}^{N}f(x_{2k-1}) \right) + \symcal{O}(N^{-4}),
+      ∫_a^b f(x) \, \symup{d}x = \frac{h}{3}\left( f(a)+ f(b) + 2 \sum_{k=1}^{N/2-1}f(x_{2k}) + 4\sum_{k=1}^{N/2}f(x_{2k-1}) \right) + \symcal{O}(N^{-4}),
     \end{equation}
     mit $xₖ = a + kh$ und $N$ gerade.
   \end{description}
