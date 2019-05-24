@@ -1,0 +1,72 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 7}
+\date{Ausgabe: Fr, 24.05.2019, Besprechung: Fr, 14.06.2019}
+\setcounter{question}{13}
+\begin{document}
+
+\maketitle
+
+Die bisherigen Integrationsregeln sind für ein-dimensionale Integrale definiert worden.
+In der Physik treten jedoch meistens mehrdimensionale Integrale auf.
+Um mehrdimensionale Integrale zu berechnen, kann das mehrdimensionale Integral durch die hintereinander Ausführung von ein-dimensionalen Integrale nach dem Satz von Fubini berechnet werden,
+\begin{equation}
+  ∫_{[a, b]}^n f(x₁, …, xₙ) \, \symup{d}^n \symbf{x} =  ∫_{a}^b \symup{d}x₁ … ∫_{a}^{b}\symup{d}xₙ f(x₁,…, xₙ).
+\end{equation}
+Der Nachteil bei diesem Ansatz ist, dass die Anzahl der Stützstellen exponentiell mit der Anzahl der Dimensionen anwächst; der sogenannte Fluch der Dimensionalität.
+
+\begin{question}[subtitle=Beugung]
+  Berechnen Sie numerisch die Intensität bei Frauenhoferbeugung an einem Ring $a < |\symbf{r}| < 2a$:
+  \begin{align}
+    I(\symbf{q}) = C |u(\symbf{q})|², \\
+    u(\symbf{q}) = ∫_{\text{Ring}} \symup{d}²\symbf{r} \, e^{-i \symbf{q}·\symbf{r}}.
+  \end{align}
+  \begin{enumerate}[(i)]
+  \item Schreiben Sie das Integral in Polarkoordinaten.
+    Warum hängt $u$ nur von $q ≡ |\symbf{q}|$ ab? Schreiben Sie $u(q)$ als reelles Integral und berechnen Sie $u(q)$ und $I(q)$ analytisch.
+  \item Führen Sie das zwei-dimensionale Integral numerisch in Polarkoordinaten (Winkel- und Radialintegration) für $q = 0.1 \sfrac{a}{n}$ mit $n = 0, 1, 2, …, 50$.
+    Plotten Sie die entsprechenden Werte $I(q)$ (mit $C = 1$).
+  \item Berechnen Sie die Intensität $I(\symbf{q})$ auch für einen Viertelring $a < |\symbf{r}| < 2a$ und $0 < ϕ < \sfrac{π}{2}$ (in Polarkoordinaten), indem Sie das zwei-dimensionale Integral wieder numerisch in Polarkoordinaten ausführen.
+    Werten Sie dazu Realteil und Imaginärteil von $u(qₓ, q_y)$ getrennt aus, z.\,Bsp.\ für $qₓ = 0.2 \sfrac{n}{a}$ und $q_y = 0.2 \sfrac{m}{a}$ mit $m, n = -30, …, 0, … 30$.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Elektrostatik]
+  Wir berechnen das elektrostatische Potential für zwei Ladungsverteilungen in einem Würfel der Kantenlänge $2a$ numerisch durch direkte drei-dimensionale Integration.
+  \begin{enumerate}[(i)]
+  \item Zuerst betrachten wir eine homogene Ladungsverteilung
+    \begin{equation}
+      ρ(\symbf{r}) =
+      \begin{dcases*}
+        ρ₀ & $|x| < a, |y| < a, |z| < a$ \\
+        0 & sonst
+      \end{dcases*},
+    \end{equation}
+    und berechnen das elektrostatische Potential auf der $x$-Achse
+    \begin{equation}
+      ϕ(x) = \frac{1}{4πε₀} ∫\symup{d}³\symbf{r}^\prime \, \frac{ρ(\symbf{r}^\prime)}{(x \symbf{e}_x - \symbf{r}^\prime)^{\sfrac{3}{2}}}.
+    \end{equation}
+    Führen Sie eine geeignete Wahl der Einheiten für $ϕ$ und $x$ ein, um das numerisch zu berechnende Integral einheitenlos zu machen.
+
+    Führen Sie dann das drei-dimensionale Integral numerisch aus, zunächst für $x$-Werte $\sfrac{x}{a} = 0.1 n$ mit $n = 11, 12, …, 80$ außerhalb des Würfels.
+    Plotten Sie die entsprechenden Werte $ϕ(x)$ .
+    Welche Asymptotik erwarten Sie für große $x$? (Multipol-Entwicklung)
+    Überprüfen Sie Ihre Vermutung.
+  \item Versuchen Sie das Integral auch für $|x| < a$ innerhalb des Würfels ($x$-Werte $\sfrac{x}{a} = 0.1 n$ mit $n = 0, 2, …, 10$) numerisch auszuwerten.
+    Könnte es Probleme geben?
+  \item Betrachten Sie die Ladungsverteilung
+    \begin{equation}
+      ρ(\symbf{r}) =
+      \begin{dcases*}
+        ρ₀ \sfrac{x}{a} & $|x| < a, |y| < a, |z| < a$ \\
+        0 & sonst
+      \end{dcases*}.
+    \end{equation}
+    Überlegen Sie sich wieder, wie Sie das numerisch zu berechnende Integral einheitenlos machen.
+
+    Führen Sie dann wieder das drei-dimensionale Integral numerisch aus, außerhalb und innerhalb des Würfels, d.\,h. für $x$-Werte $\sfrac{x}{a} = 0.1 n$ mit $n = 0, 1, 2, …, 80$.
+    Plotten Sie die entsprechenden Werte $ϕ(x)$.
+    Welche Asymptotik erwarten Sie nun für große $x$?
+    Berechnen Sie das erste nicht-verschwindende Multiplot-Moment und überprüfen Sie das zu erwartende asymptotische Verhalten.
+  \end{enumerate}
+\end{question}
+\end{document}
