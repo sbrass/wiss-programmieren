@@ -10,15 +10,15 @@ Die bisherigen Integrationsregeln sind für ein-dimensionale Integrale definiert
 In der Physik treten jedoch meistens mehrdimensionale Integrale auf.
 Um mehrdimensionale Integrale zu berechnen, kann das mehrdimensionale Integral durch die hintereinander Ausführung von ein-dimensionalen Integrale nach dem Satz von Fubini berechnet werden,
 \begin{equation}
-  ∫_{[a, b]}^n f(x₁, …, xₙ) \, \symup{d}^n \symbf{x} =  ∫_{a}^b \symup{d}x₁ … ∫_{a}^{b}\symup{d}xₙ f(x₁,…, xₙ).
+  ∫_{[a, b]^n} f(x₁, …, xₙ) \, \symup{d}^n \symbf{x} =  ∫_{a}^b \symup{d}x₁ … ∫_{a}^{b}\symup{d}xₙ f(x₁,…, xₙ).
 \end{equation}
 Der Nachteil bei diesem Ansatz ist, dass die Anzahl der Stützstellen exponentiell mit der Anzahl der Dimensionen anwächst; der sogenannte Fluch der Dimensionalität.
 
 \begin{question}[subtitle=Beugung]
   Berechnen Sie numerisch die Intensität bei Frauenhoferbeugung an einem Ring $a < |\symbf{r}| < 2a$:
   \begin{align}
-    I(\symbf{q}) = C |u(\symbf{q})|², \\
-    u(\symbf{q}) = ∫_{\text{Ring}} \symup{d}²\symbf{r} \, e^{-i \symbf{q}·\symbf{r}}.
+    I(\symbf{q}) & = C |u(\symbf{q})|², \\
+    u(\symbf{q}) & = ∫_{\text{Ring}} \symup{d}²\symbf{r} \, e^{-i \symbf{q}·\symbf{r}}.
   \end{align}
   \begin{enumerate}[(i)]
   \item Schreiben Sie das Integral in Polarkoordinaten.
