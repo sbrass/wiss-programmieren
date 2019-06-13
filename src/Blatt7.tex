@@ -23,7 +23,7 @@ Der Nachteil bei diesem Ansatz ist, dass die Anzahl der Stützstellen exponentie
   \begin{enumerate}[(i)]
   \item Schreiben Sie das Integral in Polarkoordinaten.
     Warum hängt $u$ nur von $q ≡ |\symbf{q}|$ ab? Schreiben Sie $u(q)$ als reelles Integral und berechnen Sie $u(q)$ und $I(q)$ analytisch.
-  \item Führen Sie das zwei-dimensionale Integral numerisch in Polarkoordinaten (Winkel- und Radialintegration) für $q = 0.1 \sfrac{a}{n}$ mit $n = 0, 1, 2, …, 50$ aus.
+  \item Führen Sie das zwei-dimensionale Integral numerisch in Polarkoordinaten (Winkel- und Radialintegration) für $q = 0.1 \sfrac{n}{a}$ mit $n = 0, 1, 2, …, 50$ aus.
     Plotten Sie die entsprechenden Werte $I(q)$ (mit $C = 1$).
   \item Berechnen Sie die Intensität $I(\symbf{q})$ auch für einen Viertelring $a < |\symbf{r}| < 2a$ und $0 < ϕ < \sfrac{π}{2}$ (in Polarkoordinaten), indem Sie das zwei-dimensionale Integral wieder numerisch in Polarkoordinaten ausführen.
     Werten Sie dazu Realteil und Imaginärteil von $u(qₓ, q_y)$ getrennt aus, z.\,Bsp.\ für $qₓ = 0.2 \sfrac{n}{a}$ und $q_y = 0.2 \sfrac{m}{a}$ mit $m, n = -30, …, 0, … 30$.
@@ -43,7 +43,7 @@ Der Nachteil bei diesem Ansatz ist, dass die Anzahl der Stützstellen exponentie
     \end{equation}
     und berechnen das elektrostatische Potential auf der $x$-Achse
     \begin{equation}
-      ϕ(x) = \frac{1}{4πε₀} ∫\symup{d}³\symbf{r}^\prime \, \frac{ρ(\symbf{r}^\prime)}{(x \symbf{e}_x - \symbf{r}^\prime)^{\sfrac{3}{2}}}.
+      ϕ(x) = \frac{1}{4πε₀} ∫\symup{d}³\symbf{r}^\prime \, \frac{ρ(\symbf{r}^\prime)}{|x \symbf{e}_x - \symbf{r}^\prime|}.
     \end{equation}
     Führen Sie eine geeignete Wahl der Einheiten für $ϕ$ und $x$ ein, um das numerisch zu berechnende Integral einheitenlos zu machen.
 

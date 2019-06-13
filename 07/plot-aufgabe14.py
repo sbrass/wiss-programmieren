@@ -12,7 +12,7 @@ plt.title('Diffraction @Ring')
 plt.xlabel('$q$')
 plt.ylabel('$I(q)$')
 plt.plot(x, y_num, 'ro', label='Numeric')
-plt.plot(x, y_ana, 'xk', label='Analytic')
+plt.plot(x, y_ana, 'k-', label='Analytic')
 plt.legend()
 
 plt.savefig('{}.pdf'.format(filename.split('.')[0]))

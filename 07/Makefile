@@ -1,7 +1,7 @@
 FC=gfortran
 FCFLAGS=-Og -Wall -pedantic -std=f2008ts -fbacktrace -g
 
-all: aufgabe14-1.pdf aufgabe14-2.pdf aufgabe15-1
+all: aufgabe14-1.pdf aufgabe14-2.pdf aufgabe15.pdf
 
 aufgabe14-1.pdf: aufgabe14-1.dat
 	./plot-aufgabe14.py $<
