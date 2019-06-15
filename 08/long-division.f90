@@ -33,12 +33,13 @@ contains
        d%q = a
     else
        associate (q => d%q, r => d%r)
-         q = polynom_single_coeff (0, 0.) !! zero
+         call q%init (0, 0.)
+         ! q = polynom_single_coeff (0, 0.) !! zero
          r = a
          deg = b%deg ()
          c = b%lc ()
          do while (r%deg () >= deg)
-            s = polynom_single_coeff (r%deg() - deg, r%lc () / c)
+            call s%init (r%deg() - deg, r%lc () / c)
             q = q + s
             r = r - s * b
          end do

@@ -16,8 +16,8 @@ program main
   a_c = [-4, 0, -2, 1]
   b_c = [-3, 1]
 
-  a = polynom_t (a_c)
-  b = polynom_t (b_c)
+  call a%init (a_c)
+  call b%init (b_c)
 
   write (OUTPUT_UNIT, '(A)', advance='no') "a: "
   call a%write (OUTPUT_UNIT)

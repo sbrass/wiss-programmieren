@@ -1,2 +1,2 @@
 env = Environment(F08FLAGS="-g -fbacktrace -fcheck=all")
-env.Program('test01', ['test01.f08', 'long-division.f08', 'divisor.f08', 'polynom.f08'])
+env.Program('test01', ['test01.f90', 'long-division.f90', 'divisor.f90', 'polynom.f90'])
