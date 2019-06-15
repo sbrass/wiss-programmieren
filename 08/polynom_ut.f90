@@ -1,6 +1,6 @@
 module polynom_ut
   use iso_fortran_env, only: r64 => REAL64, r32 => REAL32, i64 => INT64, OUTPUT_UNIT
-  use unittest
+  use unit_test, only: assert
   use polynom
 
   implicit none
