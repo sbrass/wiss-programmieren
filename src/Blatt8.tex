@@ -1,0 +1,62 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 8}
+\date{Ausgabe: Di, 18.06.2019, Besprechung: Fr, 28.06.2019}
+\setcounter{question}{16}
+
+\DeclareMathOperator{\odeg}{deg}
+
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=Polynome und Unittests]
+  Im folgenden betrachten wir Polynome $p(x)$ vom Grad $n$ mit reellen Koeffizienten $aᵢ$,
+  \begin{equation}
+    p(x) = ∑_{i = 0}^n aᵢ x^i, n ≥ 0.
+  \end{equation}
+  \begin{enumerate}[(i)]
+  \item Implementieren Sie einen Datentyp \mintinline{fortran}{polynom_t} in einem eigenen Modul, welcher folgende typ-gebundene Prozeduren besitzt:
+    \begin{itemize}
+    \item \mintinline{fortran}{init}: Initialisieren mit einem Array von Koeffizienten, bzw. mit dem führenden Koeffizienten $aₙ$ sowie dem Grad $n$ und (implizit) $a_{i ≠ n} = 0$,
+    \item \mintinline{fortran}{write}: Formatierte Ausgabe des Polynoms,
+    \item \mintinline{fortran}{lc}: Rückgabe des führenden Koeffizienten $a_n$,
+    \item \mintinline{fortran}{deg}: Rückgabe des Grad $n$,
+    \item \mintinline{fortran}{get_coeff}: Rückgabe der Koeffizienten $a_i$ als $(n+1)$-Array,
+    \item \mintinline{fortran}{operator(+)}: Addition zweier Polynome von beliebigen Graden $n, m$,
+    \item \mintinline{fortran}{operator(-)}: Subtraktion zweier Polynome von beliebigen Graden $n, m$,
+    \item \mintinline{fortran}{operator(*)}: Multiplikation zweier Polynome von beliebigen Graden $n, m$,
+    \item \mintinline{fortran}{reduce}: Reduzieren des Grades des Polynomes bis zum ersten nicht-verschwindenden führenden Koeffizienten.
+    \end{itemize}
+  \item Testen Sie jede typ-gebundene Prozedur mit geeigneten Unittests nach dem Prinzip: Vorbereiten, Durchführen und Bestätigen.
+
+    Schreiben Sie für jede typ-gebundene Prozedur einen Subroutine, welche als Argument einen logischen Wert über den Erfolg des Tests zurückgibt.
+    Die Prozedure initialisiert ein (oder mehrere) Objekt(e) vom Typ \mintinline{fortran}{polynom_t} mit entsprechenden Koeffizienten, führt eine entsprechende Aktion durch und gleicht das Ergebnis ab.
+    Überlegen Sie sich für den Abgleich, wie Sie Fließkommazahlen (einer bestimmten Präzision) sinnvoll vergleichen können.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Euklidische Polynomdivision]
+  Im folgenden sei die euklidische Polynomdivision gegeben:\\
+  Seien $a, b$ zwei reelle Polynome in einer Variable, $b ≠ 0$ und $\odeg(a) ≥ \odeg(b)$, wobei $\odeg$ den Grad eines Polynoms gibt.
+
+  Dann existieren zwei Polynome, $q$, der Quotient, und $r$, der Rest, mit
+  \begin{equation}
+    \label{eq:euclidian-division}
+    a = b \cdot q + r, \quad \odeg(r) < \odeg(b).
+  \end{equation}
+
+  Der Pseudocode für den Algorithmus zur Berechnung von $q$ und $b$ lautet:
+  \inputminted{fortran}{../src/Algorithm8.f08}
+
+  \begin{enumerate}[(i)]
+  \item Implementieren Sie einen abstrakten Datentyp \mintinline{fortran}{polynom_divisor_t} in einem eigenem Modul, welcher ein Quotienten- und ein Rest-Polynom vom Typ \mintinline{fortran}{polynom_t} als \mintinline{fortran}{private} Felder enthält.
+    Weiterhin, implementieren Sie folgende typ-gebundene Prozeduren: \mintinline{fortran}{write} (deferred), \mintinline{fortran}{divide} (deferred), \mintinline{fortran}{get_quotient} um das Quotienten-Polynom zu erhalten, \mintinline{fortran}{get_remainder} um das Rest-Polynom zu erhalten.
+  \item Implementieren Sie als Typen-Erweiterung von \mintinline{fortran}{polynom_divisor_t} die Polynomdivision.
+
+    \textit{Hinweis:} Greifen Sie für eine möglichst übersichtliche Implementierung der euklidischen Polynomdivision auf die überladenen Operatoren von \mintinline{fortran}{polynom_t} zurück.
+
+
+  \item Testen Sie die Polynomdivision mit entsprechenden Unittests, welche die verschiedenen Szenarien der Polynomdivision prüfen.
+  \end{enumerate}
+\end{question}
+\end{document}
