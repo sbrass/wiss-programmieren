@@ -29,22 +29,22 @@ contains
     type(polynom_t), intent(in) :: a, b
     integer :: deg, c
     type(polynom_t) :: s
-    if (b%deg () == 0) then
-       d%q = a
-    else
-       associate (q => d%q, r => d%r)
-         call q%init (0, 0.)
-         ! q = polynom_single_coeff (0, 0.) !! zero
-         r = a
-         deg = b%deg ()
-         c = b%lc ()
-         do while (r%deg () >= deg)
-            call s%init (r%deg() - deg, r%lc () / c)
-            q = q + s
-            r = r - s * b
-         end do
-       end associate
+    if (all (b%get_coeff () == 0)) then
+       call d%q%init ([0.])
+       call d%r%init ([0.])
+       return
     end if
+    associate (q => d%q, r => d%r)
+      call q%init (0, 0.)
+      r = a
+      deg = b%deg ()
+      c = b%lc ()
+      do while (r%deg () >= deg)
+         call s%init (r%deg() - deg, r%lc () / c)
+         q = q + s
+         r = r - s * b
+      end do
+    end associate
   end subroutine long_division_divide
 
   type(polynom_t) function long_division_get_quotient (d) result (p)

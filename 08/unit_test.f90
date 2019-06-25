@@ -51,14 +51,14 @@ contains
     real(r32), intent(in) :: a, b
     logical :: flag
     !! \todo check on NaN.
-    flag = (abs(a - b) <= 2._r32 * epsilon(a))
+    flag = (abs(a - b) <= 10._r32 * epsilon(a))
   end function assert_equal_real_single
 
   elemental function assert_equal_double (a, b) result (flag)
     real(r64), intent(in) :: a, b
     logical :: flag
     !! \todo check on NanN.
-    flag = (abs(a - b) <= 2._r64 * epsilon(a))
+    flag = (abs(a - b) <= 10._r64 * epsilon(a))
   end function assert_equal_double
 
   elemental function assert_equal_integer_single (a, b) result (flag)

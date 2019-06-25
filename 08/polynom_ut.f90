@@ -60,7 +60,7 @@ contains
     success = success .and. assert (2., p_sum%lc ())
   end subroutine polynom_ut_operator_add_2
 
-    subroutine polynom_ut_operator_add_3 (success)
+  subroutine polynom_ut_operator_add_3 (success)
     logical, intent(out) :: success
     type(polynom_t) :: p1, p2, p_sum
     call p1%init ([1., 1.])
