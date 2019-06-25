@@ -21,5 +21,5 @@ aufgabe17: polynom.o divisor.o long_division.o long_division_ut.o unit_test.o au
 .PHONY: clean
 clean:
 	rm -f *.o *.mod *.dat *.pdf
-	rm -f aufgabe16
+	rm -f aufgabe16 aufgabe17
 	rm -f Makefile.deps
