@@ -1,5 +1,6 @@
 module unit_test
-  use iso_fortran_env, only: r64 => REAL64, r32 => REAL32, &
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  use, intrinsic :: iso_fortran_env, only: r64 => REAL64, r32 => REAL32, &
        i32 => INT32, i64 => INT64
 
   implicit none
@@ -50,14 +51,18 @@ contains
   elemental function assert_equal_real_single (a, b) result (flag)
     real(r32), intent(in) :: a, b
     logical :: flag
-    !! \todo check on NaN.
+    if (.not. ieee_is_finite (a) .or. .not. ieee_is_finite (b)) then
+       flag = .false.
+    end if
     flag = (abs(a - b) <= 10._r32 * epsilon(a))
   end function assert_equal_real_single
 
   elemental function assert_equal_double (a, b) result (flag)
     real(r64), intent(in) :: a, b
     logical :: flag
-    !! \todo check on NanN.
+    if (.not. ieee_is_finite (a) .or. .not. ieee_is_finite (b)) then
+       flag = .false.
+    end if
     flag = (abs(a - b) <= 10._r64 * epsilon(a))
   end function assert_equal_double
 
