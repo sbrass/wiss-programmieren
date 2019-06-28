@@ -1,0 +1,63 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 9}
+\date{Ausgabe: Fr, 28.06.2019, Besprechung: Fr, 05.07.2019}
+\setcounter{question}{18}
+\begin{document}
+
+\maketitle
+
+Bei der Perkolation (von lat.\ \textit{percolare}: durchsickern lassen, auswaschen; motiviert durch Flüssigkeiten in porösen Medien) betrachten wir Gitter (Quadrat, Dreieck, kubisch) in $d$~Dimensionen mit $n$ Gitterplätzen (Sites) und $n_{B}$ Kanten (Bonds) zwischen den nächsten Nachbarn.
+Die Zahl $n$ der Gitterplätze und $n_{B}$ hängt über $n_{B} = \frac{z}{n}$ zusammen, wobei $z$ die Koordinatenzahl, d.\,h.\ die Zahl der nächsten Nachbarn ist.
+Ein kubisches Gitter der Größe $l$ hat $n = l^d$ Gitterplätze und es gilt $z = 2·d$.
+
+Bei der Platzperkolation (Kantenperkolation) ist jeder Gitterplatz (jede Kante) entweder besetzt oder unbesetzt, wobei die Gitterplätze zufällig mit der Wahrscheinlichkeit $p$ besetzt werden.
+Dadurch entstehen \textit{Cluster} von besetzten Plätzen, die durch \textquote{nächste Nachbar}-Kanten verbunden sind.
+
+Die durchschnittliche Clustergröße wächst dabei mit $p$ an.
+Die Schwellenwahrscheinlichkeit wird durch $p_c$ gegeben, dass immer ein perkolierende Cluster, welcher von einem Ende des Systemms (z.\,Bsp.\ oben oder links) zum anderen Ende (z.\,B.\ unten oder rechts) reicht, auftritt.
+Im thermodynamischen Limit $n, l → ∞$ ist ein perkolierender Cluster gleichbedeutend mit einem unendlichen großen Cluster.
+
+\begin{question}[subtitle=Perkolationschwelle]
+  Ziel dieser Aufgabe ist die Bestimmung von $p_c$ für die Platzperkolation auf dem Quadratgitter $(d = 2)$.
+  \begin{enumerate}[(i)]
+  \item Initialisierung: Erzeugen Sie eine Datenstruktur (etwa ein Array) für ein Gitter mit $l \times l$ Plätzen und erzeugen Sie $R$ Realisationen, indem Sie jeweils jeden Platz mit einer Wahrscheinlichkeit $p$ besetzen.
+    Ihr Programm sollte in der Lage sein, die Systemgröße~$l$, die Besetzungswahrscheinlichkeit $p$ und die Zahl an Realisationen $R$ als Parameter zu verarbeiten.
+
+    \begin{sloppypar}
+      \textit{Hinweis:} Für die Parameterübergabe über die Kommandozeile verwenden Sie \mintinline{fortran}{command_argument_count} und \mintinline{fortran}{get_command_argument}.
+    \end{sloppypar}
+  \item Cluster finden: Schreiben Sie eine Prozedur, die in der Lage ist, alle Cluster aus besetzten Punkten zu finden.
+
+    \textit{Leath}-Algorithmus: Nutzen Sie eine Liste (LIFO, FIFO), welche noch abzusuchende Plätzen zu verwalten und immer die Nachbarn eines in den Cluster aufgenommenen Punktes hinzu zu fügen.
+    Die Suche startet bei einem besetzten Platz und lässt den Cluster dann solange anwachsen, bis es keine benachbarten besetzten Plätze mehr gibt.
+    Das wird solange wiederholt, bis alle Plätze entweder besucht wurden oder unbesetzt sind.
+    Sie sollten danach für jeden besetzten Platz wissen, in welchem Cluster er sich befindet.
+
+    Implementieren Sie hierfür einen abgeleiteten Typ mit entsprechenden Typ-gebundenen Prozeduren für die Verwaltung und Erweiterung einer Liste.
+  \item Visualisieren der Clustersuche: Plotten Sie das Ergebnis Ihrer Clustersuche für jeweils eine Realisation mit $n = 50$ für $p = 0.1, 0.5, 0.9$, z.\,B. in dem Sie die Plätze entsprechend ihrer Clusterzugehörgikeit einfärben.
+  \item Überprüfen Sie, ob es einen perkolierenden Cluster gibt und bestimmen Sie die relative Perkolationshäufigkeit $q_l(p)$ für mindestens $l = 10, 50, 100$.
+    Bestimmen Sie zuvor anhand von $q_{10}(p)$ einen geeigneten Wert für $R$, indem Sie für $R = 10$ bis $R = 10^4$ variieren.
+    % Plotten Sie die Anzahl der Cluster $n_c$ gegen die Besetzungswahrscheinlichkeit $p$ und die verschiedenen Systemgrößen $l$.
+  \item Begründen Sie, warum $q_l(p_c)$ unabhängig von $l$ sein sollte, und bestimmen Sie damit $p_c$ mit möglichst hoher Genauigkeit.
+  \item Ändern Sie Ihre Clustersuche so ab, dass Sie auch die Größe des größten Clusters bestimmen.
+    Der Anteil am gesamten Gitter, der durch den größten Cluster belegt wird, wird mit $M_∞$ bezeichnet.
+    Es gilt dabei
+    \begin{equation}
+      M_∞ (p) \sim |p - p_c|^{-β},
+    \end{equation}
+    mit einem Exponenten $β$.
+    Versuchen Sie $β$ durch Messung von $M_∞(p)$ in Systemen einer möglichst großen Größe $l$ sowie durch Finite-Size-Scaling
+    \begin{equation}
+      M_∞(p) l^{β/ν} \sim f\left( (p - p_c)^{1/ν} l \right)
+    \end{equation}
+    zu bestimmen.
+    Variieren Sie dazu $β$ und $ν$ so, dass die Datenpunkten möglichst gut auf eine Funktion $f$ kollabieren (wiederum min.\ für $l = 10, 50, 100$).
+  \end{enumerate}
+\end{question}
+
+\begin{question}[subtitle=Union-Find-Algorithmus]
+  Implementieren Sie den Hoshen--Kopelman-Algorithmus nach dem Prinzip des Union-Find für die Cluster-Suche.
+
+  \url{https://www.ocf.berkeley.edu/~fricke/projects/hoshenkopelman/hoshenkopelman.html} (Stand: 28.\ Juni 2019).
+\end{question}
+\end{document}
