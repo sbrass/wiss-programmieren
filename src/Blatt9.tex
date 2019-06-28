@@ -14,7 +14,7 @@ Bei der Platzperkolation (Kantenperkolation) ist jeder Gitterplatz (jede Kante) 
 Dadurch entstehen \textit{Cluster} von besetzten Plätzen, die durch \textquote{nächste Nachbar}-Kanten verbunden sind.
 
 Die durchschnittliche Clustergröße wächst dabei mit $p$ an.
-Die Schwellenwahrscheinlichkeit wird durch $p_c$ gegeben, dass immer ein perkolierende Cluster, welcher von einem Ende des Systemms (z.\,Bsp.\ oben oder links) zum anderen Ende (z.\,B.\ unten oder rechts) reicht, auftritt.
+Die Schwellenwahrscheinlichkeit wird durch $p_c$ gegeben, dass immer ein perkolierende Cluster, welcher von einem Ende des Systems (z.\,Bsp.\ oben oder links) zum anderen Ende (z.\,B.\ unten oder rechts) reicht, auftritt.
 Im thermodynamischen Limit $n, l → ∞$ ist ein perkolierender Cluster gleichbedeutend mit einem unendlichen großen Cluster.
 
 \begin{question}[subtitle=Perkolationschwelle]
@@ -28,7 +28,7 @@ Im thermodynamischen Limit $n, l → ∞$ ist ein perkolierender Cluster gleichb
     \end{sloppypar}
   \item Cluster finden: Schreiben Sie eine Prozedur, die in der Lage ist, alle Cluster aus besetzten Punkten zu finden.
 
-    \textit{Leath}-Algorithmus: Nutzen Sie eine Liste (LIFO, FIFO), welche noch abzusuchende Plätzen zu verwalten und immer die Nachbarn eines in den Cluster aufgenommenen Punktes hinzu zu fügen.
+    \textit{Leath}-Algorithmus: Nutzen Sie eine Liste (LIFO, FIFO), um noch abzusuchende Plätzen zu verwalten und die Nachbarn eines in den Cluster aufgenommenen Punktes hinzu zufügen.
     Die Suche startet bei einem besetzten Platz und lässt den Cluster dann solange anwachsen, bis es keine benachbarten besetzten Plätze mehr gibt.
     Das wird solange wiederholt, bis alle Plätze entweder besucht wurden oder unbesetzt sind.
     Sie sollten danach für jeden besetzten Platz wissen, in welchem Cluster er sich befindet.
@@ -36,7 +36,7 @@ Im thermodynamischen Limit $n, l → ∞$ ist ein perkolierender Cluster gleichb
     Implementieren Sie hierfür einen abgeleiteten Typ mit entsprechenden Typ-gebundenen Prozeduren für die Verwaltung und Erweiterung einer Liste.
   \item Visualisieren der Clustersuche: Plotten Sie das Ergebnis Ihrer Clustersuche für jeweils eine Realisation mit $n = 50$ für $p = 0.1, 0.5, 0.9$, z.\,B. in dem Sie die Plätze entsprechend ihrer Clusterzugehörgikeit einfärben.
   \item Überprüfen Sie, ob es einen perkolierenden Cluster gibt und bestimmen Sie die relative Perkolationshäufigkeit $q_l(p)$ für mindestens $l = 10, 50, 100$.
-    Bestimmen Sie zuvor anhand von $q_{10}(p)$ einen geeigneten Wert für $R$, indem Sie für $R = 10$ bis $R = 10^4$ variieren.
+    Bestimmen Sie zuvor anhand von $q_{10}(p)$ einen geeigneten Wert für $R$, indem Sie $R = 10$ bis $R = 10^4$ variieren.
     % Plotten Sie die Anzahl der Cluster $n_c$ gegen die Besetzungswahrscheinlichkeit $p$ und die verschiedenen Systemgrößen $l$.
   \item Begründen Sie, warum $q_l(p_c)$ unabhängig von $l$ sein sollte, und bestimmen Sie damit $p_c$ mit möglichst hoher Genauigkeit.
   \item Ändern Sie Ihre Clustersuche so ab, dass Sie auch die Größe des größten Clusters bestimmen.
