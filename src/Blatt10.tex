@@ -1,0 +1,71 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Übungsblatt 9}
+\date{Ausgabe: Di, 09.07.2019, Besprechung: Fr, 12.07.2019}
+\setcounter{question}{18}
+\begin{document}
+
+\maketitle
+
+\begin{question}[subtitle=\textit{Monte Carlo}-Integration]
+  Wir berechnen Integrale durch \textit{Monte Carlo}-Integration, d.\,h.\ indem wir die Integrale als Mittelwert bezüglich einer Zufallsvariablen $x$ mit Verteilung $p(x)$ umschreiben,
+  \begin{equation}
+    \langle f \rangle = ∫ f(x) p(x) \, \symup{d}x = \frac{1}{N} ∑_{i = 1}^N f(xᵢ),
+  \end{equation}
+  und das Integral durch $N$-maliges Ziehen einer Zufallszahl aus der Verteilung $p(x)$ berechnen.
+  Wir wollen hier $f(x)$ so wählen, dass wir den Standard-Zufallszahlengenerator aus dem Kompiler für $p(x)$ verwenden können, der eine Gleichverteilung $p(x) = 1$ im Intervall $x ∈ [0, 1)$ generiert.
+  \begin{itemize}[(i)]
+  \item\label{item:1} Das klassische Beispiel ist die Berechnung von $π$:
+    \begin{equation}
+      \label{eq:1}
+      ∫_{|symbf{r}| < 1} \symup{d}² r.
+    \end{equation}
+    Ziehen Sie $N$ in $[0, 1)$ gleichverteilte Zufallszahlenpaare $(xᵢ, yᵢ)$ und zählen Sie, wie oft $xᵢ² + yᵢ² ≤ 1$ gilt.
+    Wie berechnet sich daraus das Integral~\eqref{eq:1} und welcher Wahl von $f(x)$ entspricht dieses Vorgehen?
+  \item Sie kennen das in~\ref{item:1}) gesuchte Ergebnis hinreichend genau.
+    Berechnen Sie den Fehler als Funktion von N für $N = 10^k$ mit $k = 1, …, 6$ und plotten Sie Ihr Ergebnis doppelt-logarithmisch.
+    Welche $N$-Abhängigkeit ergibt sich? \textit{Hinweis}: $\sfrac{1}{N - 1}$.)
+
+    Berechnen Sie $1000$-mal das Integral~\eqref{eq:1} mit $N = 1000$ und plotten Sie ein Histogram der Verteilung der Ergebnisse.
+    Wie sollte die Verteilung aussehen? \textit{Hinweis}: Zentraler Grenzwertsatz.
+  \item Schreiben Sie eine \textit{Monte Carlo}-Integrationsroutine zur Berechnung des Flächeninhalt einer Ellipse,
+    \begin{equation}
+      \label{eq:2}
+      ∫_{\left( \frac{x}{a} \right)² + \left( \frac{y}{b} \right)² ≤ 1} \symup{d}x \symup{d}y,
+    \end{equation}
+    als Funktion der Parameter $a$ und $b$.
+  \item Erweitern Sie die Routine auf die \textit{Monte Carlo}-Integration eines Integrals,
+    \begin{equation}
+      \label{eq:3}
+      ∫_{\left( \frac{x}{a} \right)² + \left( \frac{y}{b} \right)² ≤ 1} f(x. y) \,\symup{d}x \symup{d}y,
+    \end{equation}
+    einer Funktion $f(x, y)$ über einer Ellipse.
+    Berechnen Sie damit
+    \begin{equation}
+      \label{eq:4}
+      ∫_{\left( \frac{x}{2} \right)² + \left( y \right)² ≤ 1} \exp\left( -x² \right) \,\symup{d}x \symup{d}y.
+    \end{equation}
+    \textit{Kontrolle}: \num{2.993}.
+  \end{itemize}
+\end{question}
+
+\begin{question}[subtitle=Einfaches Sampling, Importance-Sampling, Markov-Sampling eines \textit{Monte Carlo}-Integrals]
+  Wir berechnen das \textit{Monte Carlo}-Integral,
+  \begin{equation}
+    I = ∫_0^∞ exp(-βx)x² \, \symup{d}x,
+  \end{equation}
+  auf drei Arten:
+  \begin{itemize}[(i)]
+  \item Einfaches Sampling mit gleichverteilten Samplex $xᵢ ∈ [0, ∞)$.
+  \item Importance-Sampling mit Verteilung $p(x) = β\exp(-βx)$. Samplen Sie diese Verteilung direkt mit Hilfe der Transformationsmethode (siehe Übungsblatt XX).
+  \item Markov-Sampling der gleichen Verteilung $p(x) = β \exp(-βx)$ mithilfe des Metropolis--Hastings-Algorithmus.
+  \end{itemize}
+  Vergleichen Sie die Ergebnisse und Konvergenzgeschwindigkeit der drei Methoden für $β = 0.01, 1, 100$.\\[1.5em]
+
+  (Vereinfachter) Metropolis--Hastings-Algorithmus: \\
+  Ausgehend vom Zustand $xᵢ$,
+  \begin{itemize}[1.]
+  \item wähle zufällig einen Punkt $xⱼ$ mit Vorschlagswahrscheinlichkeit $V_{ij} = V_{ji} = \text{const.}$ aus,
+  \item bestimme die Akzeptanzwahrscheinlichkeit $A_{ij} = \min \left( 1, \sfrac{p(xⱼ)}{p(xᵢ)} \right)$,
+  \item akzeptiere den neuen Zustand $xⱼ$ immer, wenn $A_{ij} = 1$, oder mit der Wahrscheinlichkeit $r ∈ [0, 1)$, gleichverteilt, wenn $r ≤ A_{ij}$, ansonsten setze $x_j = x_i$.
+  \end{itemize}
+\end{question}
