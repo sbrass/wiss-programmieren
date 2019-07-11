@@ -1,0 +1,98 @@
+\input{header.tex}
+\NewDocumentCommand\AufgabenBlatt{}{Hausarbeit}
+\date{Ausgabe: Fr, 12.07.2019, Abgabe: Do, 18.07.2019, 18:00 Uhr}
+\setcounter{question}{0}
+\begin{document}
+
+\maketitle
+
+Betrachten Sie eine gewöhnliche Differentialgleichung (DGL) $n$-ter Ordnung für eine (vektorwertige) Funktion $\vec{y} = \vec{y}(x)$ in einer Variable $x$, welche in der allgemeinsten Form gegeben ist als
+\begin{equation}
+  \label{eq:1}
+  \vec{y}^{(n)} = f(x, \vec{y}, \vec{y}^\prime, \vec{y}^{\prime\prime}, …, \vec{y}^{(n - 1)}).
+\end{equation}
+Die allgemeine DGL in~\eqref{eq:1} kann dabei zu einem System von $n$ Differentialgleichungen 1.\ Ordnung reduziert werden, mit
+\begin{equation}
+  \label{eq:2}
+  \symbf{y} ≡ \begin{pmatrix}
+    \vec{y}₁ = & \vec{y}\\
+    \vec{y}₂ = & \vec{y}^\prime\\
+    \vdots & \\
+    \vec{y}ₙ = & \vec{y}^{(n - 1)}
+  \end{pmatrix},
+\end{equation}
+erhalten wir eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\symbf{y}(x)$,
+\begin{equation}
+  \label{eq:3}
+  \symbf{y}^{\prime} = \begin{pmatrix}
+    \vec{y}₁^\prime \\
+    \vec{y}₂^\prime \\
+    … \\
+    \vec{y}_{n - 1}^\prime \\
+    \vec{y}_n^\prime
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \vec{y}₂\\
+    \vec{y}₃\\
+    … \\
+    \vec{y}ₙ\\
+    f(x, \vec{y₁}, \vec{y₂}, …, \vec{yₙ})
+  \end{pmatrix}.
+\end{equation}
+Damit ist es ausreichend, nur Differentialgleichungen 1. Ordnung von der Form:
+\begin{equation}
+  \label{eq:3}
+  \vec{y}^\prime = f(x, \vec{y}),
+\end{equation}
+sukzessiv numerisch zu lösen.
+
+\begin{question}[subtitle=Euler-Verfahren]
+  In der Physik, vorallem in der Mechanik, ist durch die Bewegungsgleichungen
+  \begin{equation}
+    \label{eq:5}
+    \dot{\vec{r}} = f(t, \vec{r}),
+  \end{equation}
+  der zeitlichen Verlauf einer Ortskoordinate $\vec{r}(t)$ mit der Anfangsbedingung $\vec{y}(\vec{0}) = \vec{y}₀$ gegeben.
+  Um diese Differentialgleichung 1. Ordnung numerisch zu lösen, wird das Zeitintervall der Lösung $[0, T]$ in $N$-Schritte und einer \textit{festen} Schrittbreite $h = \sfrac{T}{N}$ unterteilt.
+
+  Gesucht sind dann bei der diskreten Zeit $tₙ = n h$ die Funktionswerte $\vec{r}ₙ = \vec{r}(tₙ)$.
+
+  Das einfachste Lösungsverfahren ist durch das sogenannte Euler-Verfahren gegegebn, das auf eier einfachen Diskretisierung der Zeitableitung auf der linken Seite der DGL in~\eqref{eq:5}  beruht,
+  \begin{equation}
+    \label{eq:6}
+    \vec{y}_{n+1} = \vec{y}_n + h \vec{f}\left( tₙ, \vec{y}ₙ \right) + \symcal{O}(h²).
+  \end{equation}
+
+  \begin{enumerate}[(i)]
+  \item Schreiben Sie ein Programm, dass die Newtonsche Bewegungsgleichung für ein Teilchen in einem Kraftfeld $\vec{F}(\vec{r})$,
+    \begin{align}
+      \dot{\vec{r}} & = \vec{v}, \\
+      \dot{\vec{v}} & = \frac{1}{m} \vec{F} (\vec{r}),
+    \end{align}
+    mit Hilfe des Euler-Verfahren mit fester Schrittbreite löst.
+    Das Programm sollte modular gestaltet sein, sodass Ihr DGL-Löser wiederverwendet werden kann.
+    Darüberhinaus sollte in geeigneter Weise das Kraftfeld $\vec{F}(\vec{r})$ als Argument an die Löser-Prozedur übergeben bekommen können.
+    Weiterhin, sollten Ihr Löser auf mindestens drei Raumdimensionen ($\vec{r}, \vec{v}, \vec{F} ∈ \symbb{R}³$) oder einer beliebigen Dimension $d$ arbeiten können.
+
+  \item Testen Sie Ihren DGL-Löser anhand des harmonische Oszillators,
+    \begin{equation}
+      \label{eq:7}
+      \frac{1}{m} \vec{F}(\vec{r}) = - \vec{r}.
+    \end{equation}
+    \begin{enumerate}[a)]
+    \item Testen Sie für die Anfangsbedingungen: $\vec{r}(0)$ beliebig, $\vec{v}(0) = 0$, dass Sie eine harmonische Schwingung erhalten.
+    \item Testen Sie, wie klein Sie die Schrittweite machen müssen, damit Ihr Oszillator bei mehreren Oszillationen immer wieder seine maximale Anfangsauslenkung erreicht.
+    \item Testem Sie die Energieerhaltung für verschiedene Auslenkung und verschiedene Massen $m$.
+    \end{enumerate}
+  \end{enumerate}
+\end{question}
+
+\textit{Hinweis zur Abgabe:}
+\begin{itemize}
+\item Benutzen Sie verständliche Modul-, Prozedur-, Typ- oder Variablennamen und versehen Sie entsprechende Stellen mit aussagreichen Kommentaren.
+\item Alle eingereichten Quellcode-Dateien sollte mit folgenden Kompiler-Flags unter \verb|gfortran| fehlerfrei kompilieren: \verb|-O2 -Wall -Werror -pedantic -std=f2008ts|.
+\item Sie müssen kein Makefile o.ä. bereitstellen.
+\item Senden Sie Ihre Lösung an die E-Mail: \url{brass@physik.uni-siegen.de}.
+\end{itemize}
+\end{document}
