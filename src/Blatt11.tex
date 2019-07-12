@@ -11,7 +11,7 @@ Betrachten Sie eine gewöhnliche Differentialgleichung (DGL) $n$-ter Ordnung fü
   \label{eq:1}
   \vec{y}^{(n)} = f(x, \vec{y}, \vec{y}^\prime, \vec{y}^{\prime\prime}, …, \vec{y}^{(n - 1)}).
 \end{equation}
-Die allgemeine DGL in~\eqref{eq:1} kann dabei zu einem System von $n$ Differentialgleichungen 1.\ Ordnung reduziert werden, mit
+Die allgemeine DGL in~\eqref{eq:1} kann zu einem Gleichungssystem von $n$ Differentialgleichungen 1.~Ordnung reduziert werden, wobei Sie mit
 \begin{equation}
   \label{eq:2}
   \symbf{y} ≡ \begin{pmatrix}
@@ -21,7 +21,7 @@ Die allgemeine DGL in~\eqref{eq:1} kann dabei zu einem System von $n$ Differenti
     \vec{y}ₙ = & \vec{y}^{(n - 1)}
   \end{pmatrix},
 \end{equation}
-erhalten wir eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\symbf{y}(x)$,
+eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\symbf{y}(x)$ erhalten,
 \begin{equation}
   \label{eq:3}
   \symbf{y}^{\prime} = \begin{pmatrix}
@@ -37,7 +37,7 @@ erhalten wir eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\
     \vec{y}₃\\
     … \\
     \vec{y}ₙ\\
-    f(x, \vec{y₁}, \vec{y₂}, …, \vec{yₙ})
+    f(x, \vec{y}₁, \vec{y}₂, …, \vec{y}ₙ)
   \end{pmatrix}.
 \end{equation}
 Damit ist es ausreichend, nur Differentialgleichungen 1. Ordnung von der Form:
@@ -45,20 +45,19 @@ Damit ist es ausreichend, nur Differentialgleichungen 1. Ordnung von der Form:
   \label{eq:3}
   \vec{y}^\prime = f(x, \vec{y}),
 \end{equation}
-sukzessiv numerisch zu lösen.
+numerisch zu lösen.
 
 \begin{question}[subtitle=Euler-Verfahren]
-  In der Physik, vorallem in der Mechanik, ist durch die Bewegungsgleichungen
+  In der Physik (vorallem in der Mechanik) wird durch eine Bewegungsgleichungen in differentieller Form
   \begin{equation}
     \label{eq:5}
     \dot{\vec{r}} = f(t, \vec{r}),
   \end{equation}
-  der zeitlichen Verlauf einer Ortskoordinate $\vec{r}(t)$ mit der Anfangsbedingung $\vec{y}(\vec{0}) = \vec{y}₀$ gegeben.
-  Um diese Differentialgleichung 1. Ordnung numerisch zu lösen, wird das Zeitintervall der Lösung $[0, T]$ in $N$-Schritte und einer \textit{festen} Schrittbreite $h = \sfrac{T}{N}$ unterteilt.
-
+  der zeitlichen Verlauf einer Ortskoordinate $\vec{r}(t)$ mit der Anfangsbedingung $\vec{y}(\vec{0}) = \vec{y}₀$ eindeutig festgelegt.
+  Um diese Differentialgleichung 1. Ordnung numerisch zu lösen, wird das Zeitintervall der Lösung $[0, T]$ in $N$-Schritten durch eine \textit{feste} Schrittbreite $h = \sfrac{T}{N}$ unterteilt.
   Gesucht sind dann bei der diskreten Zeit $tₙ = n h$ die Funktionswerte $\vec{r}ₙ = \vec{r}(tₙ)$.
 
-  Das einfachste Lösungsverfahren ist durch das sogenannte Euler-Verfahren gegegebn, das auf eier einfachen Diskretisierung der Zeitableitung auf der linken Seite der DGL in~\eqref{eq:5}  beruht,
+  Das einfachste Lösungsverfahren ist durch das sogenannte Euler-Verfahren gegeben, das auf einer einfachen Diskretisierung der Zeitableitung auf der linken Seite der Differentialgleichung in~\eqref{eq:5} beruht,
   \begin{equation}
     \label{eq:6}
     \vec{y}_{n+1} = \vec{y}_n + h \vec{f}\left( tₙ, \vec{y}ₙ \right) + \symcal{O}(h²).
@@ -71,11 +70,10 @@ sukzessiv numerisch zu lösen.
       \dot{\vec{v}} & = \frac{1}{m} \vec{F} (\vec{r}),
     \end{align}
     mit Hilfe des Euler-Verfahren mit fester Schrittbreite löst.
-    Das Programm sollte modular gestaltet sein, sodass Ihr DGL-Löser wiederverwendet werden kann.
-    Darüberhinaus sollte in geeigneter Weise das Kraftfeld $\vec{F}(\vec{r})$ als Argument an die Löser-Prozedur übergeben bekommen können.
-    Weiterhin, sollten Ihr Löser auf mindestens drei Raumdimensionen ($\vec{r}, \vec{v}, \vec{F} ∈ \symbb{R}³$) oder einer beliebigen Dimension $d$ arbeiten können.
+    Das Programm sollte modular gestaltet sein, sodass Ihr Bewegungsgleichungslöser wiederverwendet werden kann.
+    Darüberhinaus sollte in geeigneter Weise das Kraftfeld $\vec{F}(\vec{r})$ als Argument an die Löser-Prozedur übergeben werden können und Ihr Löser sollte dabei auf mindestens drei Raumdimensionen ($\vec{r}, \vec{v}, \vec{F} ∈ \symbb{R}³$) oder einer beliebigen Dimension $d$ arbeiten können.
 
-  \item Testen Sie Ihren DGL-Löser anhand des harmonische Oszillators,
+  \item Testen Sie Ihren Bewegungsgleichungslöser anhand des harmonische Oszillators,
     \begin{equation}
       \label{eq:7}
       \frac{1}{m} \vec{F}(\vec{r}) = - \vec{r}.
@@ -83,16 +81,17 @@ sukzessiv numerisch zu lösen.
     \begin{enumerate}[a)]
     \item Testen Sie für die Anfangsbedingungen: $\vec{r}(0)$ beliebig, $\vec{v}(0) = 0$, dass Sie eine harmonische Schwingung erhalten.
     \item Testen Sie, wie klein Sie die Schrittweite machen müssen, damit Ihr Oszillator bei mehreren Oszillationen immer wieder seine maximale Anfangsauslenkung erreicht.
-    \item Testem Sie die Energieerhaltung für verschiedene Auslenkung und verschiedene Massen $m$.
+    \item Testen Sie die Energieerhaltung.\\
+      \textit{Hinweis:} Es gilt der Zusammenhang $T + V$, wobei $\vec{F}(\vec{r}) = - ∇V(\vec{r})$.
     \end{enumerate}
   \end{enumerate}
 \end{question}
 
 \textit{Hinweis zur Abgabe:}
 \begin{itemize}
-\item Benutzen Sie verständliche Modul-, Prozedur-, Typ- oder Variablennamen und versehen Sie entsprechende Stellen mit aussagreichen Kommentaren.
-\item Alle eingereichten Quellcode-Dateien sollte mit folgenden Kompiler-Flags unter \verb|gfortran| fehlerfrei kompilieren: \verb|-O2 -Wall -Werror -pedantic -std=f2008ts|.
-\item Sie müssen kein Makefile o.ä. bereitstellen.
+\item Gliedern Sie Ihre Lösung sinnvoll und benutzen Sie verständliche Modul-, Prozedur-, Typ- oder Variablennamen und versehen Sie entsprechende Stellen mit aussagreichen Kommentaren.
+\item Alle eingereichten Quellcode-Dateien sollte mit folgenden Compiler-Flags unter \verb|gfortran| fehlerfrei kompilieren: \verb|-O2 -Wall -Werror -pedantic -std=f2008ts|.
+\item Sie müssen kein Makefile o.\,ä.\ bereitstellen.
 \item Senden Sie Ihre Lösung an die E-Mail: \url{brass@physik.uni-siegen.de}.
 \end{itemize}
 \end{document}
