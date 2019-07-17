@@ -6,46 +6,46 @@
 
 \maketitle
 
-Betrachten Sie eine gewöhnliche Differentialgleichung (DGL) $n$-ter Ordnung für eine (vektorwertige) Funktion $\vec{y} = \vec{y}(x)$ in einer Variable $x$, welche in der allgemeinsten Form gegeben ist als
-\begin{equation}
-  \label{eq:1}
-  \vec{y}^{(n)} = f(x, \vec{y}, \vec{y}^\prime, \vec{y}^{\prime\prime}, …, \vec{y}^{(n - 1)}).
-\end{equation}
-Die allgemeine DGL in~\eqref{eq:1} kann zu einem Gleichungssystem von $n$ Differentialgleichungen 1.~Ordnung reduziert werden, wobei Sie mit
-\begin{equation}
-  \label{eq:2}
-  \symbf{y} ≡ \begin{pmatrix}
-    \vec{y}₁ = & \vec{y}\\
-    \vec{y}₂ = & \vec{y}^\prime\\
-    \vdots & \\
-    \vec{y}ₙ = & \vec{y}^{(n - 1)}
-  \end{pmatrix},
-\end{equation}
-eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\symbf{y}(x)$ erhalten,
-\begin{equation}
-  \label{eq:3}
-  \symbf{y}^{\prime} = \begin{pmatrix}
-    \vec{y}₁^\prime \\
-    \vec{y}₂^\prime \\
-    … \\
-    \vec{y}_{n - 1}^\prime \\
-    \vec{y}_n^\prime
-  \end{pmatrix}
-  =
-  \begin{pmatrix}
-    \vec{y}₂\\
-    \vec{y}₃\\
-    … \\
-    \vec{y}ₙ\\
-    f(x, \vec{y}₁, \vec{y}₂, …, \vec{y}ₙ)
-  \end{pmatrix}.
-\end{equation}
-Damit ist es ausreichend, nur Differentialgleichungen 1. Ordnung von der Form:
-\begin{equation}
-  \label{eq:3}
-  \vec{y}^\prime = f(x, \vec{y}),
-\end{equation}
-numerisch zu lösen.
+% Betrachten Sie eine gewöhnliche Differentialgleichung (DGL) $n$-ter Ordnung für eine (vektorwertige) Funktion $\vec{y} = \vec{y}(x)$ in einer Variable $x$, welche in der allgemeinsten Form gegeben ist als
+% \begin{equation}
+%   \label{eq:1}
+%   \vec{y}^{(n)} = f(x, \vec{y}, \vec{y}^\prime, \vec{y}^{\prime\prime}, …, \vec{y}^{(n - 1)}).
+% \end{equation}
+% Die allgemeine DGL in~\eqref{eq:1} kann zu einem Gleichungssystem von $n$ Differentialgleichungen 1.~Ordnung reduziert werden, wobei Sie mit
+% \begin{equation}
+%   \label{eq:2}
+%   \symbf{y} ≡ \begin{pmatrix}
+%     \vec{y}₁ = & \vec{y}\\
+%     \vec{y}₂ = & \vec{y}^\prime\\
+%     \vdots & \\
+%     \vec{y}ₙ = & \vec{y}^{(n - 1)}
+%   \end{pmatrix},
+% \end{equation}
+% eine Differentialgleichung 1. Ordnung für den Funktionen-Vektor $\symbf{y}(x)$ erhalten,
+% \begin{equation}
+%   \label{eq:3}
+%   \symbf{y}^{\prime} = \begin{pmatrix}
+%     \vec{y}₁^\prime \\
+%     \vec{y}₂^\prime \\
+%     … \\
+%     \vec{y}_{n - 1}^\prime \\
+%     \vec{y}_n^\prime
+%   \end{pmatrix}
+%   =
+%   \begin{pmatrix}
+%     \vec{y}₂\\
+%     \vec{y}₃\\
+%     … \\
+%     \vec{y}ₙ\\
+%     f(x, \vec{y}₁, \vec{y}₂, …, \vec{y}ₙ)
+%   \end{pmatrix}.
+% \end{equation}
+% Damit ist es ausreichend, nur Differentialgleichungen 1. Ordnung von der Form:
+% \begin{equation}
+%   \label{eq:3}
+%   \vec{y}^\prime = f(x, \vec{y}),
+% \end{equation}
+% numerisch zu lösen.
 
 \begin{question}[subtitle=Euler-Verfahren]
   In der Physik (vorallem in der Mechanik) wird durch eine Bewegungsgleichungen in differentieller Form
@@ -64,7 +64,7 @@ numerisch zu lösen.
   \end{equation}
 
   \begin{enumerate}[(i)]
-  \item Schreiben Sie ein Programm, dass die Newtonsche Bewegungsgleichung für ein Teilchen in einem Kraftfeld $\vec{F}(\vec{r})$,
+  \item Schreiben Sie ein Programm, dass die Newtonsche Bewegungsgleichung für $\vec{r}(t)$ und $\vec{v}(t)$ eines Teilchen mit der Masse $m$ in einem Kraftfeld $\vec{F}(\vec{r})$,
     \begin{align}
       \dot{\vec{r}} & = \vec{v}, \\
       \dot{\vec{v}} & = \frac{1}{m} \vec{F} (\vec{r}),
@@ -73,16 +73,20 @@ numerisch zu lösen.
     Das Programm sollte modular gestaltet sein, sodass Ihr Bewegungsgleichungslöser wiederverwendet werden kann.
     Darüberhinaus sollte in geeigneter Weise das Kraftfeld $\vec{F}(\vec{r})$ als Argument an die Löser-Prozedur übergeben werden können und Ihr Löser sollte dabei auf mindestens drei Raumdimensionen ($\vec{r}, \vec{v}, \vec{F} ∈ \symbb{R}³$) oder einer beliebigen Dimension $d$ arbeiten können.
 
+    \textit{Hinweis:} Beachten Sie, dass Sie die beiden Differentialgleichung zur gleichen Zeit $tₙ$ lösen.
   \item Testen Sie Ihren Bewegungsgleichungslöser anhand des harmonische Oszillators,
     \begin{equation}
       \label{eq:7}
       \frac{1}{m} \vec{F}(\vec{r}) = - \vec{r}.
     \end{equation}
     \begin{enumerate}[a)]
-    \item Testen Sie für die Anfangsbedingungen: $\vec{r}(0)$ beliebig, $\vec{v}(0) = 0$, dass Sie eine harmonische Schwingung erhalten.
-    \item Testen Sie, wie klein Sie die Schrittweite machen müssen, damit Ihr Oszillator bei mehreren Oszillationen immer wieder seine maximale Anfangsauslenkung erreicht.
-    \item Testen Sie die Energieerhaltung.\\
-      \textit{Hinweis:} Es gilt der Zusammenhang $T + V$, wobei $\vec{F}(\vec{r}) = - ∇V(\vec{r})$.
+    \item Testen Sie für die Anfangsbedingungen: $\vec{r}(0)= (-1, +1)^{T}$, $\vec{v}(0) = (0, 0)^{T}$, dass Sie eine harmonische Schwingung erhalten.
+
+      \textit{Hinweis:} Geben Sie hierzu $tₙ, \vec{r}ₙ$ und $\vec{v}ₙ$ auf der Standardausgabe aus. Ein ausführbares Skript zum Plotten der Datenpunkte wird Ihnen zur Verfügung gestellt.
+    \item Testen Sie, wie sich verschiedene Schrittweiten auf die maximale Auslenkung des Oszillator über mehrere Perioden auswirkt.
+      Was beobachten Sie und welche physikalische Auswirkung könnte dies haben?
+    \item Testen Sie die Energieerhaltung, d.\,h.\ $H = \frac{1}{2}m\dot{\vec{r}}² + V(\vec{r}) = \text{const}$.\\
+      \textit{Hinweis:} Es gilt $\vec{F}(\vec{r}) = - ∇V(\vec{r}) ⇒ V(\vec{r}) = \frac{1}{2}r²$.
     \end{enumerate}
   \end{enumerate}
 \end{question}

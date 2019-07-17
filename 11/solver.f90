@@ -31,6 +31,7 @@ module solver
      real(r64) :: t = 0
    contains
      procedure :: init => newton_solver_init
+     procedure :: get_t => newton_solver_get_t
      procedure :: solve_step => newton_solver_solve_step
      procedure :: solve => newton_solver_solve
   end type newton_solver_t
@@ -44,9 +45,13 @@ contains
     solver%t0 = t0
     solver%tn = tn
     solver%n = n
-    solver%h = (t0 - tn) / n
+    solver%h = (tn - t0) / n
     solver%t = t0
   end subroutine newton_solver_init
+  real(r64) function newton_solver_get_t (solver) result (tn)
+    class(newton_solver_t), intent(in) :: solver
+    tn = solver%t
+  end function newton_solver_get_t
   subroutine newton_solver_solve_step (solver, ext_field, r, v)
     class(newton_solver_t), intent(inout) :: solver
     class(func_t), dimension(:), intent(in) :: ext_field

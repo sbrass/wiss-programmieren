@@ -5,12 +5,12 @@ program main
 
   real(r64), parameter :: pi = 3.141592653589793
 
-  write (OUTPUT_UNIT, *) 10, abs (compute_pi (10_i64)- pi)
-  write (OUTPUT_UNIT, *) 100, abs (compute_pi (100_i64)- pi)
-  write (OUTPUT_UNIT, *) 1000, abs (compute_pi (1000_i64)- pi)
-  write (OUTPUT_UNIT, *) 10000, abs (compute_pi (10000_i64)- pi)
-  write (OUTPUT_UNIT, *) 100000, abs (compute_pi (100000_i64)- pi)
-  write (OUTPUT_UNIT, *) 1000000, abs (compute_pi (1000000_i64)- pi)
+  write (OUTPUT_UNIT, *) 10, abs (compute_pi (10_i64)- pi) / pi
+  write (OUTPUT_UNIT, *) 100, abs (compute_pi (100_i64)- pi) / pi
+  write (OUTPUT_UNIT, *) 1000, abs (compute_pi (1000_i64)- pi) / pi
+  write (OUTPUT_UNIT, *) 10000, abs (compute_pi (10000_i64)- pi) / pi
+  write (OUTPUT_UNIT, *) 100000, abs (compute_pi (100000_i64)- pi) / pi
+  write (OUTPUT_UNIT, *) 1000000, abs (compute_pi (1000000_i64)- pi) / pi
 contains
   !! ∫_{|r| ≤ 1} d²r → f(x, y) = 1.
   !! Kreis mit Radius 1 und Mittelpunkt in (0, 0).

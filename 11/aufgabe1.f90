@@ -21,11 +21,11 @@ program main
   v = [0, 0]
 
   !! h = 10 / 10000 = 10-3
-  call newton_solver%init (0._r64, 10._r64, 10000_i64)
-  print *, r, v, 1.
-  do i = 1, 10000
+  call newton_solver%init (0._r64, 10._r64, 1000_i64)
+  print *, 0., r, v, 1.
+  do i = 1, 1000
      call newton_solver%solve_step (ext_field, r, v)
-     print *, r, v, 0.5 * (dot_product (v, v) + dot_product (r, r))
+     print *, newton_solver%get_t (), r, v, 0.5 * (dot_product (v, v) + dot_product (r, r))
      !! F = -∇φ ⇒ φ = 1/2 r²
      !! T + V = const. ⇒ 1/2 m v² + 1/2 r²
   end do

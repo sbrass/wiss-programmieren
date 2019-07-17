@@ -25,7 +25,7 @@ contains
     int = 0.
     do i = 1, n
        call random_number (r)
-       x = (b - a) * r
+       x = (b - a) * r - a
        int = int + func (x, beta)
     end do
     int = (b - a) * int / n

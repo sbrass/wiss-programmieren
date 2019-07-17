@@ -1,11 +1,10 @@
 FC=gfortran
 FCFLAGS=-O2 -Wall -Werror -pedantic -std=f2008ts -fbacktrace -g
 
-all: aufgabe1
+all: aufgabe1.pdf
 
-
-aufgabe22.pdf: aufgabe22-1.dat aufgabe22-2.dat aufgabe22-3.dat
-	./aufgabe22.py $^
+aufgabe1.pdf: aufgabe1.dat
+	./aufgabe1.py $<
 
 aufgabe%.dat: aufgabe%
 	./$< > $@
