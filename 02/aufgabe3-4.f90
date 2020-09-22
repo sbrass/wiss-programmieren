@@ -12,7 +12,7 @@ program main
   rj = 1234
   a = 16807
   c = 0
-  m = 2**31 - 1
+  m = 2_i64**31 - 1
 
   do i = 1, 10000
      ri = lcg (rj, a, c, m)

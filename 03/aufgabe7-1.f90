@@ -22,7 +22,7 @@ program main
   ri = 123456789
   a = 65539
   c = 0
-  md = 2**31
+  md = 2_i64**31
 
   !! Initialize mean, variance and chi2.
   cnt = 0
