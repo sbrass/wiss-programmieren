@@ -1,8 +1,8 @@
 FC=gfortran
 FCFLAGS=-Og -Wall -pedantic -std=f2008ts -fbacktrace -g
 
-# all: aufgabe19-1-1.pdf aufgabe19-1-2.pdf aufgabe19-1-3.pdf aufgabe19-2.pdf aufgabe20-1-1.pdf aufgabe20-1-2.pdf aufgabe20-1-3.pdf
-all: aufgabe20-1-1.pdf aufgabe20-1-2.pdf aufgabe20-1-3.pdf
+all: aufgabe19-1-1.pdf aufgabe19-1-2.pdf aufgabe19-1-3.pdf aufgabe19-2.pdf aufgabe20-1-1.pdf aufgabe20-1-2.pdf aufgabe20-1-3.pdf
+#all: aufgabe20-1-1.pdf aufgabe20-1-2.pdf aufgabe20-1-3.pdf
 
 aufgabe19-%.pdf: aufgabe19-%.dat
 	./plot-cluster.py $<

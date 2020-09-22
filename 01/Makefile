@@ -1,6 +1,8 @@
 FC=gfortran
 FCFLAGS=-O2 -Wall -Werror -pedantic -std=f2008ts
 
+all: pq aufgabe1 aufgabe2 plot
+
 pq: pq.f90
 	$(FC) $(FCFLAGS) -o $@ $<
 
@@ -22,4 +24,4 @@ clean:
 	rm -f aufgabe1
 	rm -f aufgabe2
 	rm -f aufgabe2.dat
-	rm -f aufgabe2.pdf
+	rm -f aufgabe.pdf
