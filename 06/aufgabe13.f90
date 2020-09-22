@@ -20,6 +20,6 @@ program main
   n = int (a / h, i64)
   !! Secure that n is even (for the Simpson rule).
   if (mod (n , 2_i64) /= 0) n = n + 1
-  print *, "∫_0^∞ exp(-x)/√x = 2∫_-∞^∞ exp(-x^2)"
+  print *, "∫_0^∞ exp(-x)/√x = ∫_-∞^∞ exp(-x^2)"
   print *, "Simpsonregel mit ", n, " Punkten: ", 2 * simpson_rule (f4, 0._r64, a, n)
 end program main

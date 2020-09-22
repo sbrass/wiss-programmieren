@@ -4,7 +4,7 @@ program main
 
   implicit none
 
-  integer, parameter :: M = 100, N = 1000
+  integer, parameter :: M = 1000, N = 100000
 
   !! Random number generator.
   integer(i64) :: ri

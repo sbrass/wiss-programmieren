@@ -31,7 +31,6 @@ contains
     real(r64), intent(in) :: xi
     integer(i64), intent(in) :: ni
     type(hermite_t), intent(in) :: hermite
-
     psi = hermite%evaluate (xi)
     psi = psi * exp (-0.5 * xi**2)
     psi = psi / sqrt (2._r64**ni * faculty(ni) * sqrt (PI))

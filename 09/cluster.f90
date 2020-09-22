@@ -24,6 +24,7 @@ module cluster
      procedure :: print_grid => grid_pretty_print
      procedure :: print_cluster => grid_pretty_print_cluster
      procedure :: search_cluster => grid_search_cluster
+     procedure :: search_cluster_hk => grid_search_cluster_hk
      procedure :: is_percolated => grid_is_percolated
      procedure :: get_ratio_max_cluster => grid_get_ratio_max_cluster
   end type grid_t
@@ -168,6 +169,103 @@ contains
       grid%site(c(1), c(2)) = .false.
     end subroutine add_site
   end subroutine grid_search_cluster
+
+  subroutine grid_search_cluster_hk (grid)
+    class(grid_t), intent(inout) :: grid
+    logical :: left_site, above_site
+    integer, dimension(:), allocatable :: label
+    integer :: i, j, largest_label, old_label
+    largest_label = 0
+    allocate (label(grid%size * grid%size), source = [(i, i=1, grid%size * grid%size)])
+    !! Find clusters by walking over the grid from (1, 1) to (l, l).
+    !! Walk from left to right, and from above to below.
+    !! If grid(i, j) is occupied, then
+    !! - left and above are not occupied → new cluster, increment largest_label
+    !! by one.
+    !! - left, but not above occupied → attach to the cluster to the left.
+    !! - not left, but above occupied → attach to the cluster above.
+    !! - left and above are occupied → Union of the left and above cluster,
+    !! attach cluster to the left.
+    do j = 1, grid%size
+       do i = 1, grid%size
+          if (grid%site(i, j)) then
+             left_site = left (grid, [i, j])
+             above_site = above (grid, [i, j])
+             if (.not. left_site .and. .not. above_site) then
+                !! Neither a label above nor to the left.
+                !! Make a new, as-yet-unused cluster label.
+                largest_label = largest_label + 1
+                grid%cluster(i, j) = largest_label
+             else if (left_site .and. .not. above_site) then
+                !! One neighbor, to the left.
+                grid%cluster(i, j) = find (grid%cluster (i - 1, j), label)
+             else if (.not. left_site .and. above_site) then
+                !! One neighbor, above.
+                grid%cluster(i, j) = find (grid%cluster (i, j - 1), label)
+             else
+                !! Neighbors both to the left and above,
+                !! link the left and above clusters.
+                call union (grid%cluster(i - 1, j), grid%cluster(i, j - 1), label)
+                grid%cluster(i, j) = find (grid%cluster(i - 1, j), label)
+             end if
+          end if
+       end do
+    end do
+    do i = 1, largest_label
+       if (label(i) == i) cycle
+
+    end do
+    !! Count cluster sizes.
+    !! Test on percolation.
+    !! Test whether the current cluster hits left and right side of the grid,
+    !! or top/bottom.
+    allocate (grid%cluster_size (largest_label))
+    do i = 1, largest_label
+       grid%percolation = grid%percolation &
+            .or. (any (grid%cluster(1, :) == i) .and. any (grid%cluster(grid%size, :) == i)) &
+            .or. (any (grid%cluster(:, 1) == i) .and. any (grid%cluster(:, grid%size) == i))
+       grid%cluster_size (i) = count (grid%cluster == i)
+    end do
+  contains
+    function left (grid, c) result (flag)
+      type(grid_t), intent(in) :: grid
+      integer, dimension(2), intent(in) :: c
+      logical :: flag
+      if (c(1) - 1 >= 1) then
+         flag = grid%site(c(1) - 1, c(2))
+      else
+         flag = .false.
+      end if
+    end function left
+
+    function above (grid, c) result (flag)
+      type(grid_t), intent(in) :: grid
+      integer, dimension(2), intent(in) :: c
+      logical :: flag
+      if (c(2) - 1 >= 1) then
+         flag = grid%site(c(1), c(2) - 1)
+      else
+         flag = .false.
+      end if
+    end function above
+
+    function find (x, label) result (y)
+      integer, intent(in) :: x
+      integer, dimension(:), intent(inout) :: label
+      integer :: y
+      y = x
+      do while (label(y) /= y)
+         y = label(y)
+      end do
+    end function find
+
+    subroutine union (left, above, label)
+      integer, intent(in) :: left
+      integer, intent(in) :: above
+      integer, dimension(:), intent(inout) :: label
+      label(find (left, label)) = find (above, label)
+    end subroutine union
+  end subroutine grid_search_cluster_hk
 
   subroutine grid_pretty_print_cluster (grid)
     class(grid_t), intent(in) :: grid

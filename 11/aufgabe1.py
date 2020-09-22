@@ -12,7 +12,7 @@ if (len(sys.argv) < 2):
 
 filename = sys.argv[1]
 print("Open and parse {}.".format(filename))
-data = np.genfromtxt('aufgabe1.dat')
+data = np.genfromtxt(filename)
 
 t = data.T[0, :].T
 r = data.T[1:3, :].T
